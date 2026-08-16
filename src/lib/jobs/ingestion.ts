@@ -13,9 +13,16 @@ export async function ingestSources(sources: JobSource[], query: SourceSearchQue
     try {
       const rawJobs = await source.search(query);
       for (const raw of rawJobs) {
-        const normalized = await source.normalize(raw);
-        const result = scoreOpportunity({ ...normalized, id: crypto.randomUUID(), opportunityScore: 0, createdAt: normalized.firstSeenAt, updatedAt: normalized.lastSeenAt }, preferences);
-        jobs.push({ ...normalized, id: crypto.randomUUID(), opportunityScore: result.score, createdAt: normalized.firstSeenAt, updatedAt: normalized.lastSeenAt });
+        try {
+          const normalized = await source.normalize(raw);
+          const applicantCount = await source.getApplicantCount(raw);
+          const id = crypto.randomUUID();
+          const candidate = { ...normalized, applicantCount, id, opportunityScore: 0, createdAt: normalized.firstSeenAt, updatedAt: normalized.lastSeenAt };
+          const result = scoreOpportunity(candidate, preferences);
+          jobs.push({ ...candidate, opportunityScore: result.score });
+        } catch (error) {
+          failures.push({ source: source.id, message: `Job ${raw.sourceJobId}: ${error instanceof Error ? error.message : "normalization failed"}` });
+        }
       }
     } catch (error) { failures.push({ source: source.id, message: error instanceof Error ? error.message : "Unknown source failure" }); }
   }

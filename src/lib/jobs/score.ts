@@ -28,6 +28,13 @@ export function scoreOpportunity(job: NormalizedJob, preferences: SearchPreferen
   if (/\b(senior|staff|principal|lead|manager|director|architect)\b/.test(haystack)) add("Senior leadership wording", -50);
   else if (/\b(junior|graduate|entry[ -]?level|associate)\b/.test(haystack)) add("Junior or graduate role", 15);
   else add("Experience level unspecified", 5);
+  const matchedRole = preferences.desiredRoles.find((role) => haystack.includes(role.toLowerCase()));
+  if (matchedRole) add(`${matchedRole} role match`, 10);
+  for (const keyword of preferences.negativeKeywords) {
+    const normalizedKeyword = keyword.trim().toLowerCase();
+    const isBuiltInSignal = ["senior", "staff", "principal", "lead", "manager", "director", "architect"].includes(normalizedKeyword);
+    if (normalizedKeyword && !isBuiltInSignal && haystack.includes(normalizedKeyword)) add(`${keyword} negative preference`, -50);
+  }
   if (job.remoteType === "fully_remote") add("Fully remote", 20);
   if (job.remoteType === "restricted_remote") add("Remote with geographic restriction", 10);
   if (job.remoteType === "hybrid") add("Hybrid", 3);
