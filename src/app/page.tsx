@@ -20,14 +20,6 @@ type Job = {
 
 const statusOptions: Job["status"][] = ["New", "Saved", "Applied", "Assessment", "Interview", "Rejected", "Ghosted", "Offer", "Ignored"];
 
-const seedJobs: Job[] = [
-  { id: 1, title: "Junior Java Developer", company: "northstar", location: "Milan, Italy", remote: "Fully remote", postedHours: 5, applicants: 8, score: 93, technologies: ["Java", "Spring Boot", "PostgreSQL"], level: "Junior", status: "New" },
-  { id: 2, title: "Backend Engineer — Java", company: "Factorial", location: "Barcelona, Spain", remote: "Remote · Europe", postedHours: 12, applicants: 18, score: 87, technologies: ["Java", "Spring", "SQL"], level: "Junior", status: "New" },
-  { id: 3, title: "Graduate Software Developer", company: "Mollie", location: "Amsterdam, Netherlands", remote: "Hybrid", postedHours: 20, applicants: 22, score: 82, technologies: ["Java", "TypeScript", "REST"], level: "Graduate", status: "Saved" },
-  { id: 4, title: "Software Engineer, Platform", company: "Qonto", location: "Paris, France", remote: "Remote · Europe", postedHours: 31, applicants: 11, score: 79, technologies: ["Java", "Spring Boot", "AWS"], level: "Mid", status: "New" },
-  { id: 5, title: "Java Application Developer", company: "Pleo", location: "Copenhagen, Denmark", remote: "Fully remote", postedHours: 46, applicants: null, score: 74, technologies: ["Java", "React", "MySQL"], level: "Junior", status: "New" },
-];
-
 function scoreReasons(job: Job) {
   const freshness = job.postedHours < 6 ? 30 : job.postedHours < 24 ? 25 : job.postedHours < 72 ? 15 : 5;
   const applicantPoints = job.applicants === null ? 0 : job.applicants < 10 ? 30 : job.applicants <= 25 ? 25 : 15;
@@ -53,7 +45,7 @@ function displayStatus(value: string | undefined): Job["status"] {
 }
 
 export default function Home() {
-  const [jobs, setJobs] = useState(seedJobs);
+  const [jobs, setJobs] = useState<Job[]>([]);
   const [query, setQuery] = useState("");
   const [remoteOnly, setRemoteOnly] = useState(false);
   const [lowApplicants, setLowApplicants] = useState(false);
@@ -69,14 +61,10 @@ export default function Home() {
   const [statusFilter, setStatusFilter] = useState<"all" | Job["status"]>("all");
   const [technologyFilter, setTechnologyFilter] = useState("all");
   const [hydrated, setHydrated] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
 
   useEffect(() => {
-    const stored = window.localStorage.getItem("radario-job-statuses");
-    if (!stored) { setHydrated(true); return; }
-    try {
-      const statuses = JSON.parse(stored) as Record<string, Job["status"]>;
-      setJobs((current) => current.map((job) => statuses[job.id] ? { ...job, status: statuses[job.id] } : job));
-    } catch { /* Ignore malformed local state and keep the demo inbox usable. */ }
     setHydrated(true);
   }, []);
 
@@ -88,8 +76,7 @@ export default function Home() {
     fetch("/api/jobs").then(async (response) => {
       if (!response.ok) return;
       const result = await response.json() as { jobs?: Array<Record<string, unknown>> };
-      if (!result.jobs?.length) return;
-      const persistedJobs: Job[] = result.jobs.map((row) => {
+      const persistedJobs: Job[] = (result.jobs ?? []).map((row) => {
         const postedAt = typeof row.posted_at === "string" ? new Date(row.posted_at).getTime() : Date.now();
         return {
           id: String(row.id),
@@ -107,7 +94,7 @@ export default function Home() {
         };
       });
       setJobs(persistedJobs);
-    }).catch(() => undefined);
+    }).catch((error) => setLoadError(error instanceof Error ? error.message : "Could not load jobs.")).finally(() => setLoading(false));
   }, []);
 
   const visible = useMemo(() => jobs.filter((job) => {
@@ -121,6 +108,13 @@ export default function Home() {
     const matchesTechnology = technologyFilter === "all" || job.technologies.includes(technologyFilter);
     return matchesQuery && matchesRemote && matchesApplicants && matchesAge && matchesScore && matchesCountry && matchesStatus && matchesTechnology;
   }).sort((a, b) => sort === "score" ? b.score - a.score : sort === "newest" ? a.postedHours - b.postedHours : (a.applicants ?? 999) - (b.applicants ?? 999)), [jobs, query, remoteOnly, lowApplicants, ageLimit, scoreMinimum, countryFilter, statusFilter, technologyFilter, sort]);
+  const stats = useMemo(() => ({
+    newJobs: jobs.filter((job) => job.status === "New").length,
+    promising: jobs.filter((job) => job.score >= 80).length,
+    lowApplicants: jobs.filter((job) => job.applicants !== null && job.applicants < 25).length,
+    recent: jobs.filter((job) => job.postedHours <= 24).length,
+    remote: jobs.filter((job) => job.remote !== "On-site").length,
+  }), [jobs]);
 
   function updateStatus(id: number | string, status: Job["status"]) {
     setJobs((current) => current.map((job) => job.id === id ? { ...job, status } : job));
@@ -155,7 +149,6 @@ export default function Home() {
           <nav className="flex gap-2 overflow-auto lg:flex-col">
             <Link href="/" className="whitespace-nowrap rounded-lg bg-slate-950 px-3 py-2 text-left text-sm font-medium text-white">Today’s Radar</Link>
             <Link href="/apply-early" className="whitespace-nowrap rounded-lg px-3 py-2 text-left text-sm font-medium text-slate-500 hover:bg-slate-100">🚨 Apply Early</Link>
-            <Link href="/jobs/1" className="whitespace-nowrap rounded-lg px-3 py-2 text-left text-sm font-medium text-slate-500 hover:bg-slate-100">Example job detail</Link>
             <Link href="/analytics" className="whitespace-nowrap rounded-lg px-3 py-2 text-left text-sm font-medium text-slate-500 hover:bg-slate-100">Analytics</Link>
             <Link href="/notifications" className="whitespace-nowrap rounded-lg px-3 py-2 text-left text-sm font-medium text-slate-500 hover:bg-slate-100">Notifications</Link>
             <Link href="/sources" className="whitespace-nowrap rounded-lg px-3 py-2 text-left text-sm font-medium text-slate-500 hover:bg-slate-100">Sources</Link>
@@ -170,7 +163,6 @@ export default function Home() {
               <label className="block text-xs font-bold text-slate-500">Application status<select value={statusFilter} onChange={(event) => setStatusFilter(event.target.value as typeof statusFilter)} className="mt-1 w-full rounded-lg border border-slate-200 bg-white p-2 text-sm font-normal text-slate-800"><option value="all">Active jobs</option>{statusOptions.map((status) => <option key={status}>{status}</option>)}</select></label>
             </div>
           </details>
-          <div className="mt-10 hidden rounded-xl bg-orange-50 p-4 text-sm text-orange-950 lg:block"><p className="font-bold">Your edge is time.</p><p className="mt-1 leading-5 text-orange-800">6 roles are still quiet enough to act on today.</p></div>
           <Link href="/settings" className="mt-8 text-sm font-medium text-slate-500">⚙ Preferences</Link>
         </aside>
 
@@ -178,15 +170,15 @@ export default function Home() {
           <header className="flex flex-col justify-between gap-6 md:flex-row md:items-start"><div><p className="text-xs font-bold uppercase tracking-[0.18em] text-[#ff5b35]">Friday · 15 August</p><h1 className="mt-2 text-3xl font-black tracking-tight sm:text-4xl">Today&apos;s Job Radar</h1><p className="mt-2 text-slate-500">A focused queue for your next 15 minutes.</p></div><button onClick={() => setShowAddJob(true)} className="rounded-lg bg-slate-950 px-4 py-2.5 text-sm font-bold text-white">+ Add job URL</button></header>
 
           <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-5">
-            {[["37", "New jobs"], ["6", "Very promising"], ["9", "Under 25 applicants"], ["14", "Posted in 24h"], ["21", "Remote"]].map(([number, label], i) => <div key={label} className={`rounded-xl border p-4 ${i === 1 ? "border-orange-200 bg-orange-50" : "border-slate-200 bg-white"}`}><p className="text-2xl font-black">{number}</p><p className="mt-1 text-xs font-medium text-slate-500">{label}</p></div>)}
+            {[[stats.newJobs, "New jobs"], [stats.promising, "Very promising"], [stats.lowApplicants, "Under 25 applicants"], [stats.recent, "Posted in 24h"], [stats.remote, "Remote"]].map(([number, label], i) => <div key={label} className={`rounded-xl border p-4 ${i === 1 ? "border-orange-200 bg-orange-50" : "border-slate-200 bg-white"}`}><p className="text-2xl font-black">{number}</p><p className="mt-1 text-xs font-medium text-slate-500">{label}</p></div>)}
           </div>
 
-          <div className="mt-10 rounded-2xl border border-orange-200 bg-[#fff8f5] p-5 sm:p-6"><div className="flex flex-wrap items-center justify-between gap-4"><div><p className="text-sm font-black text-[#d84320]">🔥 APPLY EARLY</p><h2 className="mt-1 text-xl font-black">The window is open</h2><p className="mt-1 text-sm text-slate-600">Fresh listings with low competition and a strong signal match.</p></div><span className="rounded-full bg-white px-3 py-1 text-xs font-bold text-[#d84320]">6 opportunities</span></div></div>
+          <div className="mt-10 rounded-2xl border border-orange-200 bg-[#fff8f5] p-5 sm:p-6"><div className="flex flex-wrap items-center justify-between gap-4"><div><p className="text-sm font-black text-[#d84320]">🔥 APPLY EARLY</p><h2 className="mt-1 text-xl font-black">The window is open</h2><p className="mt-1 text-sm text-slate-600">Fresh listings with low competition and a strong signal match.</p></div><span className="rounded-full bg-white px-3 py-1 text-xs font-bold text-[#d84320]">{jobs.filter((job) => job.postedHours <= 72 && job.applicants !== null && job.applicants < 30 && job.remote !== "On-site").length} opportunities</span></div></div>
 
           <div className="mt-7 flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between"><div className="flex flex-wrap gap-2"><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search roles, companies, skills…" className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm outline-none ring-[#ff5b35] focus:ring-2 sm:w-72"/><button onClick={() => setRemoteOnly(!remoteOnly)} className={`rounded-lg border px-3 py-2 text-sm font-medium ${remoteOnly ? "border-slate-950 bg-slate-950 text-white" : "border-slate-200 bg-white"}`}>Remote</button><button onClick={() => setLowApplicants(!lowApplicants)} className={`rounded-lg border px-3 py-2 text-sm font-medium ${lowApplicants ? "border-slate-950 bg-slate-950 text-white" : "border-slate-200 bg-white"}`}>Under 25 applicants</button></div><label className="text-sm text-slate-500">Sort <select value={sort} onChange={(e) => setSort(e.target.value as typeof sort)} className="ml-1 rounded-lg border border-slate-200 bg-white px-2 py-2 text-sm font-medium text-slate-800"><option value="score">Opportunity score</option><option value="newest">Newest</option><option value="applicants">Fewest applicants</option></select></label></div>
 
           <div className="mt-5 overflow-hidden rounded-xl border border-slate-200 bg-white"><div className="hidden grid-cols-[1.8fr_1fr_0.8fr_0.7fr] gap-4 border-b border-slate-100 px-5 py-3 text-xs font-bold uppercase tracking-wider text-slate-400 md:grid"><span>Opportunity</span><span>Location</span><span>Competition</span><span>Score</span></div>{visible.map((job) => <article key={job.id} className="grid gap-4 border-b border-slate-100 p-5 last:border-0 md:grid-cols-[1.8fr_1fr_0.8fr_0.7fr] md:items-center"><div><div className="flex flex-wrap items-center gap-2"><Link href={`/jobs/${job.id}`} className="font-bold hover:text-[#d84320]">{job.title}</Link>{job.score >= 85 && <span className="rounded bg-orange-100 px-1.5 py-0.5 text-[10px] font-black text-[#d84320]">VERY HOT</span>}</div><p className="mt-1 text-sm text-slate-500">{job.company} · <span className="font-medium text-slate-700">{age(job.postedHours)}</span></p><div className="mt-3 flex flex-wrap gap-1.5">{job.technologies.map((tech) => <span key={tech} className="rounded bg-slate-100 px-2 py-1 text-[11px] font-medium text-slate-600">{tech}</span>)}</div></div><div className="text-sm"><p className="font-medium">{job.location}</p><p className="mt-1 text-slate-500">{job.remote}</p></div><div><p className={`text-lg font-black ${job.applicants !== null && job.applicants < 25 ? "text-[#d84320]" : ""}`}>{job.applicants === null ? "Unknown" : `${job.applicants} applicants`}</p><p className="text-xs text-slate-400">via {job.id === 1 ? "LinkedIn" : "Company site"}</p></div><div className="flex items-center justify-between gap-3"><button onClick={() => setSelected(job)} className="grid size-12 shrink-0 place-items-center rounded-xl bg-slate-950 text-lg font-black text-white" aria-label={`Explain score ${job.score}`}>{job.score}</button><div className="flex flex-wrap justify-end gap-1"><Link href={`/jobs/${job.id}`} className="rounded border border-slate-200 px-2 py-1 text-xs font-bold text-slate-600 hover:bg-slate-50">Open</Link>{job.url && <a href={job.url} target="_blank" rel="noreferrer" className="rounded bg-slate-950 px-2 py-1 text-xs font-bold text-white">Open job ↗</a>}<button onClick={() => updateStatus(job.id, job.status === "Saved" ? "New" : "Saved")} className="rounded px-2 py-1 text-xs font-bold text-slate-500 hover:bg-slate-100">{job.status === "Saved" ? "Saved" : "Save"}</button><button onClick={() => updateStatus(job.id, "Applied")} className="rounded bg-slate-950 px-2 py-1 text-xs font-bold text-white">{job.status === "Applied" ? "Applied" : "Apply"}</button></div></div></article>)}</div>
-          {visible.length === 0 && <div className="p-10 text-center"><p className="font-bold">No jobs match this radar view.</p><p className="mt-1 text-sm text-slate-500">Try widening the age, score, country, or technology filters.</p><button onClick={() => { setQuery(""); setRemoteOnly(false); setLowApplicants(false); setAgeLimit(168); setScoreMinimum(0); setCountryFilter("all"); setStatusFilter("all"); setTechnologyFilter("all"); }} className="mt-4 rounded-lg bg-slate-950 px-3 py-2 text-sm font-bold text-white">Clear filters</button></div>}
+          {!loading && !loadError && visible.length === 0 && <div className="p-10 text-center"><p className="font-bold">No source jobs yet.</p><p className="mt-1 text-sm text-slate-500">Run a connected source discovery or add a job URL to begin your radar.</p><button onClick={() => { setQuery(""); setRemoteOnly(false); setLowApplicants(false); setAgeLimit(168); setScoreMinimum(0); setCountryFilter("all"); setStatusFilter("all"); setTechnologyFilter("all"); }} className="mt-4 rounded-lg bg-slate-950 px-3 py-2 text-sm font-bold text-white">Clear filters</button></div>}
         </section>
       </div>
       {intakeMessage && <div role="status" className="fixed bottom-5 right-5 z-20 max-w-sm rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 shadow-xl">{intakeMessage}</div>}

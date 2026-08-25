@@ -17,7 +17,7 @@ export const sourceDescriptors: SourceDescriptor[] = [
   { id: "greenhouse", name: "Greenhouse public board", category: "company-careers", applicantCounts: "unavailable", status: "active", complianceNote: "Uses the public board API with the token configured above; applicant counts remain Unknown.", },
   { id: "lever", name: "Lever", category: "company-careers", applicantCounts: "unavailable", status: "planned", complianceNote: "Use public postings or approved APIs; never bypass access controls.", },
   { id: "linkedin", name: "LinkedIn", category: "public-board", applicantCounts: "source-dependent", status: "planned", complianceNote: "Requires an approved integration or user-provided data; no anti-bot bypassing.", },
-  { id: "indeed", name: "Indeed", category: "public-board", applicantCounts: "source-dependent", status: "planned", complianceNote: "Requires an approved integration and compliance with site terms.", },
+  { id: "indeed", name: "Indeed via Apify", category: "public-board", applicantCounts: "unavailable", status: "active", complianceNote: "Runs the referenced Apify actor; applicant counts are unavailable and remain Unknown.", },
 ];
 
 export const activeSources = sourceDescriptors.flatMap((descriptor) => descriptor.source ? [descriptor.source] : []);

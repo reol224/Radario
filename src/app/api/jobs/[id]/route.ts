@@ -3,6 +3,18 @@ import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 const allowedStatuses = new Set(["new", "saved", "applied", "assessment", "interview", "rejected", "ghosted", "offer", "ignored"]);
 
+export async function GET(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const supabase = await getSupabaseServerClient();
+  if (!supabase) return NextResponse.json({ error: "Supabase is not configured." }, { status: 503 });
+  const { data: userData } = await supabase.auth.getUser();
+  if (!userData.user) return NextResponse.json({ error: "Sign in required." }, { status: 401 });
+  const { data, error } = await supabase.from("jobs").select("*, user_jobs!inner(status, applied_at, last_contact_at, next_follow_up_at, notes), applicant_count_history(*)").eq("id", id).eq("user_jobs.user_id", userData.user.id).maybeSingle();
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (!data) return NextResponse.json({ error: "Job not found." }, { status: 404 });
+  return NextResponse.json({ job: data });
+}
+
 export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const body = await request.json().catch(() => null) as { status?: unknown; notes?: unknown; nextFollowUpAt?: unknown } | null;
