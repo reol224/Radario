@@ -32,8 +32,8 @@ devDependencies:
     specifier: ^4
     version: 4.3.3
   tempo-sdk:
-    specifier: latest
-    version: 0.0.27(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(next@16.3.1)(react@19.2.8)
+    specifier: ^0.0.28
+    version: 0.0.28(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(next@16.3.1)(react@19.2.8)
   typescript:
     specifier: ^5.9.0
     version: 5.9.3
@@ -1157,8 +1157,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /tempo-sdk@0.0.27(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(next@16.3.1)(react@19.2.8):
-    resolution: {integrity: sha512-pokXMlT8/EUGMvwftIAFGr06LCFccc+azYo1vZIeYAadS3bX+cjIhbctnxUqZdjKxT4dj5V7nkKETcStKDmqdA==}
+  /tempo-sdk@0.0.28(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(next@16.3.1)(react@19.2.8):
+    resolution: {integrity: sha512-ISIoE7aXuqP2hOlmMvzqYoZQMc12lCSOeRFhJaoDoYPneHLxZdpljp1ez3Dn9Lg2LMqwhgXxGSoDacgK/P+NLA==}
     peerDependencies:
       '@babel/core': ^7.0.0
       next: ^13 || ^14 || ^15 || ^16

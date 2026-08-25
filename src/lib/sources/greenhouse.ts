@@ -1,5 +1,6 @@
 import type { ApplicantCount, NormalizedJob } from "@/lib/jobs/types";
 import type { JobSource, RawJob, SourceSearchQuery } from "./types";
+import { inferCountry } from "@/lib/jobs/location";
 
 type GreenhouseJob = {
   id: number;
@@ -21,11 +22,6 @@ function remoteTypeFor(location: string, description: string): NormalizedJob["re
   if (/\bhybrid\b/.test(text)) return "hybrid";
   if (/\bremote\b/.test(text)) return /\b(only|within|based in|reside|residing|eligible)\b/.test(text) ? "restricted_remote" : "fully_remote";
   return "on_site";
-}
-
-function countryFor(location: string): string | null {
-  const countries = ["Italy", "Germany", "France", "Czechia", "Romania", "Poland", "Netherlands", "Spain", "Portugal", "Sweden", "Denmark", "Finland", "Ireland"];
-  return countries.find((country) => location.toLowerCase().includes(country.toLowerCase())) ?? null;
 }
 
 export class GreenhouseSource implements JobSource {
@@ -83,7 +79,7 @@ export class GreenhouseSource implements JobSource {
       company,
       companyUrl: null,
       location,
-      country: location ? countryFor(location) : null,
+      country: inferCountry(location),
       remoteType: remoteTypeFor(location ?? "", description),
       remoteRestriction: null,
       description,

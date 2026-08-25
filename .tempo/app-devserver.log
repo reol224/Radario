@@ -6,11 +6,11 @@
 - Local:         http://localhost:30729
 - Network:       http://192.168.32.1:30729
 - Environments: .env.local
-✓ Ready in 10.3s
+✓ Ready in 33.9s
 ⚠ Warning: Next.js ignored package-lock.json in C:\Users\tmdop because it is outside the current Git repository (C:\Users\tmdop\tempo\projects\job-radar).
  To use this directory, set `turbopack.root` in your Next.js config.
 
-✓ Running next.config.ts took 746ms
+✓ Running next.config.ts took 2.1s
 ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead.
 
   To migrate automatically, run:
@@ -18,21 +18,9 @@
 
   Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
 
- GET / 200 in 3.2s (next.js: 1594ms, proxy.ts: 47ms, application-code: 1525ms)
- GET / 200 in 4.3s (next.js: 220ms, proxy.ts: 3.8s, application-code: 307ms)
+○ Compiling / ...
+ GET / 200 in 95s (next.js: 69s, proxy.ts: 11.9s, application-code: 13.6s)
+ GET / 200 in 2.5s (next.js: 1042ms, proxy.ts: 167ms, application-code: 1295ms)
 ⚠️  Node.js 20 and below are deprecated and will no longer be supported in future versions of @supabase/supabase-js. Please upgrade to Node.js 22 or later. For more information, visit: https://github.com/orgs/supabase/discussions/45715
- GET /api/jobs 200 in 1236ms (next.js: 434ms, proxy.ts: 116ms, application-code: 686ms)
- GET /api/jobs 200 in 391ms (next.js: 12ms, proxy.ts: 86ms, application-code: 293ms)
- GET /sources 200 in 488ms (next.js: 218ms, proxy.ts: 134ms, application-code: 136ms)
- GET / 200 in 580ms (next.js: 108ms, proxy.ts: 15ms, application-code: 457ms)
- GET /api/jobs 200 in 82ms (next.js: 38ms, proxy.ts: 11ms, application-code: 33ms)
- GET /api/jobs 200 in 600ms (next.js: 410ms, proxy.ts: 118ms, application-code: 71ms)
- POST /api/discovery/indeed 200 in 10.6s (next.js: 293ms, proxy.ts: 233ms, application-code: 10.1s)
- GET / 200 in 1060ms (next.js: 162ms, proxy.ts: 365ms, application-code: 533ms)
- GET /api/jobs 200 in 1137ms (next.js: 108ms, proxy.ts: 478ms, application-code: 551ms)
- GET /api/jobs 200 in 817ms (next.js: 87ms, proxy.ts: 115ms, application-code: 614ms)
- GET /jobs/0136e530-58ca-44d1-8ec5-7895dc7c8caf 200 in 4.3s (next.js: 3.8s, proxy.ts: 305ms, application-code: 173ms)
-⚠️  Node.js 20 and below are deprecated and will no longer be supported in future versions of @supabase/supabase-js. Please upgrade to Node.js 22 or later. For more information, visit: https://github.com/orgs/supabase/discussions/45715
- GET /api/jobs/0136e530-58ca-44d1-8ec5-7895dc7c8caf 200 in 4.5s (next.js: 3.8s, proxy.ts: 329ms, application-code: 337ms)
- GET /api/jobs/0136e530-58ca-44d1-8ec5-7895dc7c8caf 200 in 385ms (next.js: 95ms, proxy.ts: 86ms, application-code: 204ms)
-⚠️  Node.js 20 and below are deprecated and will no longer be supported in future versions of @supabase/supabase-js. Please upgrade to Node.js 22 or later. For more information, visit: https://github.com/orgs/supabase/discussions/45715
+ GET /api/jobs 200 in 3.5s (next.js: 1267ms, proxy.ts: 279ms, application-code: 1993ms)
+ GET /api/jobs 200 in 577ms (next.js: 30ms, proxy.ts: 269ms, application-code: 277ms)

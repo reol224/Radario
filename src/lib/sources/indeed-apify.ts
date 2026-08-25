@@ -1,9 +1,9 @@
 import type { ApplicantCount, NormalizedJob } from "@/lib/jobs/types";
 import type { JobSource, RawJob, SourceSearchQuery } from "./types";
+import { inferCountry } from "@/lib/jobs/location";
 
 type ActorJob = Record<string, unknown>;
 const read = (job: ActorJob, ...keys: string[]) => keys.map((key) => job[key]).find((value) => typeof value === "string" && value.trim()) as string | undefined;
-const countries = ["Italy", "Germany", "France", "Czechia", "Romania", "Poland", "Netherlands", "Spain", "Portugal", "Sweden", "Denmark", "Finland", "Ireland"];
 const technologies = ["Java", "Spring", "Spring Boot", "SQL", "REST", "React", "TypeScript", "PostgreSQL", "MySQL", "Python", "AWS", "Docker"];
 
 function parsePostedDate(value: string | undefined, now = new Date()): string | null {
@@ -71,7 +71,7 @@ export class ApifyIndeedSource implements JobSource {
     const now = new Date().toISOString();
     return {
       source: this.id, sourceJobId: raw.sourceJobId, url: raw.url, title, company, companyUrl: null, location: location || null,
-      country: countries.find((country) => location.toLowerCase().includes(country.toLowerCase())) ?? null,
+      country: inferCountry(location),
       remoteType: remoteType(location), remoteRestriction: null, description, salaryMin: null, salaryMax: null, salaryCurrency: null,
       employmentType: read(raw.payload, "job_type", "employment_type") ?? null,
       experienceLevel: /\b(junior|graduate|entry[ -]?level|associate)\b/i.test(searchable) ? "junior" : null,

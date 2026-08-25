@@ -21,7 +21,7 @@ const defaults: PreferenceState = {
   allowedRemoteTypes: ["fully_remote", "restricted_remote", "hybrid"],
 };
 
-const countries = defaults.preferredCountries;
+const countries = ["Argentina", "Australia", "Austria", "Belgium", "Brazil", "Bulgaria", "Canada", "Chile", "China", "Croatia", "Czechia", "Denmark", "Egypt", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "India", "Indonesia", "Ireland", "Israel", "Italy", "Japan", "Latvia", "Lithuania", "Luxembourg", "Malaysia", "Mexico", "Morocco", "Netherlands", "New Zealand", "Norway", "Philippines", "Poland", "Portugal", "Romania", "Singapore", "Slovakia", "Slovenia", "South Africa", "South Korea", "Spain", "Sweden", "Switzerland", "Thailand", "Turkey", "United Arab Emirates", "United Kingdom", "United States", "Vietnam"];
 const remoteOptions: { id: RemoteType; label: string; hint: string }[] = [
   { id: "fully_remote", label: "Fully remote", hint: "No office attendance expected." },
   { id: "restricted_remote", label: "Remote with restrictions", hint: "Preserves country or region limits." },
@@ -48,13 +48,22 @@ export default function SettingsPage() {
   const [hydrated, setHydrated] = useState(false);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
+  const [countryDraft, setCountryDraft] = useState("");
   const [queries, setQueries] = useState<string[]>(() => generateSearchQueries(defaults));
   const update = <K extends keyof PreferenceState>(key: K, value: PreferenceState[K]) => setPreferences((current) => ({ ...current, [key]: value }));
+  const addCountry = (value: string) => {
+    const country = value.trim();
+    if (country && !preferences.preferredCountries.some((item) => item.toLowerCase() === country.toLowerCase())) update("preferredCountries", [...preferences.preferredCountries, country]);
+    setCountryDraft("");
+  };
 
   useEffect(() => {
     const local = window.localStorage.getItem("radario-preferences-v2");
     const storedQueries = window.localStorage.getItem("radario-search-queries");
-    if (local) { try { setPreferences({ ...defaults, ...JSON.parse(local) }); } catch { /* Use defaults. */ } }
+    if (local) { try {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setPreferences({ ...defaults, ...JSON.parse(local) });
+    } catch { /* Use defaults. */ } }
     if (storedQueries) { try { setQueries(JSON.parse(storedQueries) as string[]); } catch { /* Regenerate queries. */ } }
     fetch("/api/preferences").then(async (response) => {
       if (!response.ok) return;
@@ -92,7 +101,7 @@ export default function SettingsPage() {
       <ListEditor title="Desired roles" hint="Use several title variations to maximize discovery recall." values={preferences.desiredRoles} onChange={(value) => update("desiredRoles", value)} />
       <ListEditor title="Positive keywords" hint="Technologies and signals that should boost an opportunity." values={preferences.positiveKeywords} onChange={(value) => update("positiveKeywords", value)} tone="orange" />
       <ListEditor title="Negative keywords" hint="Roles containing these terms are strongly de-prioritized." values={preferences.negativeKeywords} onChange={(value) => update("negativeKeywords", value)} />
-      <section className="rounded-2xl border border-slate-200 bg-white p-6"><h2 className="text-lg font-black">Preferred countries</h2><p className="mt-1 text-sm text-slate-500">Choose the markets you want Radario to prioritize.</p><div className="mt-4 flex flex-wrap gap-2">{countries.map((country) => { const selected = preferences.preferredCountries.includes(country); return <button type="button" key={country} onClick={() => update("preferredCountries", selected ? preferences.preferredCountries.filter((item) => item !== country) : [...preferences.preferredCountries, country])} className={`rounded-full px-3 py-1.5 text-sm font-medium ${selected ? "bg-slate-950 text-white" : "bg-slate-100 text-slate-600"}`}>{country}</button>; })}</div></section>
+      <section className="rounded-2xl border border-slate-200 bg-white p-6"><h2 className="text-lg font-black">Preferred countries</h2><p className="mt-1 text-sm text-slate-500">Search globally. Add Canada, the United States, or any country you want Radario to prioritize.</p><div className="mt-4 flex gap-2"><select value={countryDraft} onChange={(event) => { setCountryDraft(event.target.value); if (event.target.value) addCountry(event.target.value); }} className="min-w-0 flex-1 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm"><option value="">Add a country…</option>{countries.filter((country) => !preferences.preferredCountries.includes(country)).map((country) => <option key={country} value={country}>{country}</option>)}</select><input value={countryDraft} onChange={(event) => setCountryDraft(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter") { event.preventDefault(); addCountry(countryDraft); } }} placeholder="Or type any country" className="min-w-0 flex-1 rounded-lg border border-slate-200 px-3 py-2 text-sm" /><button type="button" onClick={() => addCountry(countryDraft)} className="rounded-lg bg-slate-950 px-3 py-2 text-sm font-bold text-white">Add</button></div><div className="mt-4 flex flex-wrap gap-2">{preferences.preferredCountries.map((country) => <button type="button" key={country} onClick={() => update("preferredCountries", preferences.preferredCountries.filter((item) => item !== country))} className="rounded-full bg-slate-950 px-3 py-1.5 text-sm font-medium text-white">{country} ×</button>)}</div></section>
       <section className="rounded-2xl border border-slate-200 bg-white p-6"><h2 className="text-lg font-black">Work model</h2><p className="mt-1 text-sm text-slate-500">Remote geography stays distinct: Germany-only is not the same as Europe-wide.</p><div className="mt-4 grid gap-2 sm:grid-cols-2">{remoteOptions.map((option) => { const selected = preferences.allowedRemoteTypes.includes(option.id); return <button type="button" key={option.id} onClick={() => update("allowedRemoteTypes", selected ? preferences.allowedRemoteTypes.filter((item) => item !== option.id) : [...preferences.allowedRemoteTypes, option.id])} className={`rounded-xl border p-4 text-left ${selected ? "border-slate-950 bg-slate-950 text-white" : "border-slate-200 bg-white"}`}><p className="font-bold">{option.label}</p><p className={`mt-1 text-xs ${selected ? "text-slate-300" : "text-slate-500"}`}>{option.hint}</p></button>; })}</div></section>
     </div>
   </div></main>;

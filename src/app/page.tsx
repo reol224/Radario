@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { inferCountry } from "@/lib/jobs/location";
 
 type Job = {
   id: number | string;
@@ -9,6 +10,7 @@ type Job = {
   title: string;
   company: string;
   location: string;
+  country?: string;
   remote: "Fully remote" | "Remote · Europe" | "Hybrid" | "On-site";
   postedHours: number;
   applicants: number | null;
@@ -19,6 +21,7 @@ type Job = {
 };
 
 const statusOptions: Job["status"][] = ["New", "Saved", "Applied", "Assessment", "Interview", "Rejected", "Ghosted", "Offer", "Ignored"];
+const countryOptions = ["Argentina", "Australia", "Austria", "Belgium", "Brazil", "Bulgaria", "Canada", "Chile", "China", "Croatia", "Czechia", "Denmark", "Egypt", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "India", "Indonesia", "Ireland", "Israel", "Italy", "Japan", "Latvia", "Lithuania", "Luxembourg", "Malaysia", "Mexico", "Morocco", "Netherlands", "New Zealand", "Norway", "Philippines", "Poland", "Portugal", "Romania", "Singapore", "Slovakia", "Slovenia", "South Africa", "South Korea", "Spain", "Sweden", "Switzerland", "Thailand", "Turkey", "United Arab Emirates", "United Kingdom", "United States", "Vietnam"];
 
 function scoreReasons(job: Job) {
   const freshness = job.postedHours < 6 ? 30 : job.postedHours < 24 ? 25 : job.postedHours < 72 ? 15 : 5;
@@ -60,17 +63,8 @@ export default function Home() {
   const [countryFilter, setCountryFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState<"all" | Job["status"]>("all");
   const [technologyFilter, setTechnologyFilter] = useState("all");
-  const [hydrated, setHydrated] = useState(false);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState("");
-
-  useEffect(() => {
-    setHydrated(true);
-  }, []);
-
-  useEffect(() => {
-    if (hydrated) window.localStorage.setItem("radario-job-statuses", JSON.stringify(Object.fromEntries(jobs.map((job) => [job.id, job.status]))));
-  }, [jobs, hydrated]);
 
   useEffect(() => {
     fetch("/api/jobs").then(async (response) => {
@@ -78,12 +72,14 @@ export default function Home() {
       const result = await response.json() as { jobs?: Array<Record<string, unknown>> };
       const persistedJobs: Job[] = (result.jobs ?? []).map((row) => {
         const postedAt = typeof row.posted_at === "string" ? new Date(row.posted_at).getTime() : Date.now();
+        const location = typeof row.location === "string" ? row.location : "Location pending";
         return {
           id: String(row.id),
           url: typeof row.url === "string" ? row.url : undefined,
           title: typeof row.title === "string" ? row.title : "Untitled opportunity",
           company: typeof row.company === "string" ? row.company : "Unknown company",
-          location: typeof row.location === "string" ? row.location : "Location pending",
+          location,
+          country: typeof row.country === "string" ? row.country : inferCountry(location) ?? undefined,
           remote: remoteLabel(typeof row.remote_type === "string" ? row.remote_type : undefined),
           postedHours: Math.max(0, Math.floor((Date.now() - postedAt) / 3_600_000)),
           applicants: typeof row.applicant_count_exact === "number" ? row.applicant_count_exact : null,
@@ -103,7 +99,7 @@ export default function Home() {
     const matchesApplicants = !lowApplicants || (job.applicants !== null && job.applicants < 25);
     const matchesAge = job.postedHours <= ageLimit;
     const matchesScore = job.score >= scoreMinimum;
-    const matchesCountry = countryFilter === "all" || job.location.endsWith(countryFilter);
+    const matchesCountry = countryFilter === "all" || job.country === countryFilter;
     const matchesStatus = statusFilter === "all" ? job.status !== "Ignored" : job.status === statusFilter;
     const matchesTechnology = technologyFilter === "all" || job.technologies.includes(technologyFilter);
     return matchesQuery && matchesRemote && matchesApplicants && matchesAge && matchesScore && matchesCountry && matchesStatus && matchesTechnology;
@@ -158,7 +154,7 @@ export default function Home() {
             <div className="mt-3 space-y-3">
               <label className="block text-xs font-bold text-slate-500">Posted within<select value={ageLimit} onChange={(event) => setAgeLimit(Number(event.target.value))} className="mt-1 w-full rounded-lg border border-slate-200 bg-white p-2 text-sm font-normal text-slate-800"><option value="6">6 hours</option><option value="24">24 hours</option><option value="72">3 days</option><option value="168">7 days</option></select></label>
               <label className="block text-xs font-bold text-slate-500">Minimum score<select value={scoreMinimum} onChange={(event) => setScoreMinimum(Number(event.target.value))} className="mt-1 w-full rounded-lg border border-slate-200 bg-white p-2 text-sm font-normal text-slate-800"><option value="0">Any score</option><option value="70">70+</option><option value="80">80+</option><option value="90">90+</option></select></label>
-              <label className="block text-xs font-bold text-slate-500">Country<select value={countryFilter} onChange={(event) => setCountryFilter(event.target.value)} className="mt-1 w-full rounded-lg border border-slate-200 bg-white p-2 text-sm font-normal text-slate-800"><option value="all">All countries</option><option>Italy</option><option>Spain</option><option>Netherlands</option><option>France</option><option>Denmark</option></select></label>
+              <label className="block text-xs font-bold text-slate-500">Country<select value={countryFilter} onChange={(event) => setCountryFilter(event.target.value)} className="mt-1 w-full rounded-lg border border-slate-200 bg-white p-2 text-sm font-normal text-slate-800"><option value="all">All countries</option>{[...new Set([...countryOptions, ...jobs.map((job) => job.country).filter((country): country is string => Boolean(country))])].sort().map((country) => <option key={country}>{country}</option>)}</select></label>
               <label className="block text-xs font-bold text-slate-500">Technology<select value={technologyFilter} onChange={(event) => setTechnologyFilter(event.target.value)} className="mt-1 w-full rounded-lg border border-slate-200 bg-white p-2 text-sm font-normal text-slate-800"><option value="all">All technologies</option><option>Java</option><option>Spring</option><option>Spring Boot</option><option>SQL</option><option>TypeScript</option><option>React</option></select></label>
               <label className="block text-xs font-bold text-slate-500">Application status<select value={statusFilter} onChange={(event) => setStatusFilter(event.target.value as typeof statusFilter)} className="mt-1 w-full rounded-lg border border-slate-200 bg-white p-2 text-sm font-normal text-slate-800"><option value="all">Active jobs</option>{statusOptions.map((status) => <option key={status}>{status}</option>)}</select></label>
             </div>
