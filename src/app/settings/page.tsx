@@ -60,7 +60,7 @@ export default function SettingsPage() {
       if (!response.ok) return;
       const data = await response.json();
       const remote = data.preferences;
-      if (remote) setPreferences({ desiredRoles: remote.desired_roles ?? [], positiveKeywords: remote.positive_keywords ?? [], negativeKeywords: remote.negative_keywords ?? [], preferredCountries: remote.preferred_countries ?? [], allowedRemoteTypes: remote.allowed_remote_types ?? defaults.allowedRemoteTypes });
+      if (remote && data.storage !== "local") setPreferences({ desiredRoles: remote.desired_roles ?? [], positiveKeywords: remote.positive_keywords ?? [], negativeKeywords: remote.negative_keywords ?? [], preferredCountries: remote.preferred_countries ?? [], allowedRemoteTypes: remote.allowed_remote_types ?? defaults.allowedRemoteTypes });
     }).catch(() => undefined).finally(() => setHydrated(true));
   }, []);
 
@@ -71,8 +71,9 @@ export default function SettingsPage() {
     try {
       const response = await fetch("/api/preferences", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(preferences) });
       window.localStorage.setItem("radario-search-queries", JSON.stringify(activeQueries));
-      if (!response.ok) throw new Error((await response.json()).error ?? "Could not save preferences.");
-      setMessage("Saved to your Radario profile.");
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error ?? "Could not save preferences.");
+      setMessage(result.storage === "local" ? (result.warning ?? "Saved locally. Apply the Supabase migration to sync across devices.") : "Saved to your Radario profile.");
     } catch (error) {
       setMessage(error instanceof Error && error.message === "Failed to fetch" ? "Saved locally. Sign in and configure Supabase to sync across devices." : error instanceof Error ? error.message : "Saved locally.");
     } finally { setSaving(false); }

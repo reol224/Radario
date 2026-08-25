@@ -1,7 +1,9 @@
 {
-  "version": 3,
-  "port": 54915,
-  "allocatedAt": 1786829001755,
-  "pid": 3136,
-  "serverPid": 11432
+  "version": 4,
+  "port": 30729,
+  "allocatedAt": 1787614069724,
+  "pid": null,
+  "pidStartedAt": null,
+  "serverPid": null,
+  "serverPidStartedAt": null
 }

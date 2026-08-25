@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { manualSource } from "@/lib/sources/manual";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
+import { isMissingTable, migrationRequiredMessage } from "@/lib/supabase/schema";
 
 export async function GET() {
   const supabase = await getSupabaseServerClient();
@@ -8,7 +9,10 @@ export async function GET() {
   const { data: userData } = await supabase.auth.getUser();
   if (!userData.user) return NextResponse.json({ jobs: [], persistence: "local-only" });
   const { data, error } = await supabase.from("user_jobs").select("status, applied_at, last_contact_at, next_follow_up_at, notes, jobs(*)");
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) {
+    if (isMissingTable(error, "user_jobs") || isMissingTable(error, "jobs")) return NextResponse.json({ jobs: [], persistence: "local-only", warning: migrationRequiredMessage("jobs") });
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
   const jobs = (data ?? []).flatMap((row) => {
     const job = Array.isArray(row.jobs) ? row.jobs[0] : row.jobs;
     return job ? [{ ...job, user_status: row.status, applied_at: row.applied_at, last_contact_at: row.last_contact_at, next_follow_up_at: row.next_follow_up_at, notes: row.notes }] : [];
@@ -21,6 +25,7 @@ export async function POST(request: NextRequest) {
   if (!body || typeof body.url !== "string") return NextResponse.json({ error: "A job URL is required." }, { status: 400 });
   try { new URL(body.url); } catch { return NextResponse.json({ error: "Enter a valid URL." }, { status: 400 }); }
   const raw = await manualSource.fetchJob(body.url);
+  if (!raw) return NextResponse.json({ error: "The source could not read this URL." }, { status: 422 });
   const job = await manualSource.normalize(raw);
   const supabase = await getSupabaseServerClient();
   if (!supabase) return NextResponse.json({ job, persistence: "local-only", note: "Configure Supabase to persist manual jobs." }, { status: 201 });
@@ -58,9 +63,9 @@ export async function POST(request: NextRequest) {
     applicant_count_source: job.applicantCount?.source ?? null,
     applicant_count_updated_at: job.applicantCount?.observedAt ?? null,
   }, { onConflict: "source,source_job_id" }).select("id").single();
-  if (jobError || !persisted) return NextResponse.json({ error: jobError?.message ?? "Could not persist job." }, { status: 500 });
+  if (jobError || !persisted) return NextResponse.json({ error: jobError && isMissingTable(jobError, "jobs") ? migrationRequiredMessage("jobs") : jobError?.message ?? "Could not persist job." }, { status: jobError && isMissingTable(jobError, "jobs") ? 503 : 500 });
 
   const { error: stateError } = await supabase.from("user_jobs").upsert({ user_id: userData.user.id, job_id: persisted.id, status: "new" });
-  if (stateError) return NextResponse.json({ error: stateError.message }, { status: 500 });
+  if (stateError) return NextResponse.json({ error: isMissingTable(stateError, "user_jobs") ? migrationRequiredMessage("user_jobs") : stateError.message }, { status: isMissingTable(stateError, "user_jobs") ? 503 : 500 });
   return NextResponse.json({ job: { ...job, id: persisted.id }, persistence: "supabase" }, { status: 201 });
 }

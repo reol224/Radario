@@ -36,7 +36,11 @@
     ".next/types/**/*.ts",
     "../src/**/*",
     "designs/**/*",
-    ".next/dev/types/**/*.ts"
+    ".next/dev/types/**/*.ts",
+    ".next/tempo/types/**/*.ts",
+    ".next/tempo/dev/types/**/*.ts",
+    ".next/tempo-mt7vksv700u9/types/**/*.ts",
+    ".next/tempo-mt7vksv700u9/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

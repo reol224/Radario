@@ -1,31 +1,31 @@
 
 > job-radar@0.1.0 dev C:\Users\tmdop\tempo\projects\job-radar
-> next dev "--port=54915"
+> next dev "--port=30729"
 
 ▲ Next.js 16.3.1 (Turbopack)
-- Local:         http://localhost:54915
-- Network:       http://192.168.32.1:54915
+- Local:         http://localhost:30729
+- Network:       http://192.168.32.1:30729
 - Environments: .env.local
-✓ Ready in 17.9s
+✓ Ready in 13.1s
 ⚠ Warning: Next.js ignored package-lock.json in C:\Users\tmdop because it is outside the current Git repository (C:\Users\tmdop\tempo\projects\job-radar).
  To use this directory, set `turbopack.root` in your Next.js config.
 
-✓ Running next.config.ts took 1984ms
+✓ Running next.config.ts took 467ms
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead.
 
- GET / 200 in 57s (next.js: 26.8s, application-code: 29.9s)
- GET / 200 in 56s (next.js: 32.7s, application-code: 22.8s)
- GET / 200 in 56s (next.js: 33.3s, application-code: 22.2s)
- GET / 200 in 56s (next.js: 37.6s, application-code: 17.9s)
- GET / 200 in 56s (next.js: 39.7s, application-code: 15.8s)
- GET / 200 in 56s (next.js: 41s, application-code: 14.8s)
- GET / 200 in 9.7s (next.js: 1517ms, application-code: 8.2s)
- GET / 200 in 9.7s (next.js: 2.4s, application-code: 7.4s)
- GET / 200 in 8.3s (next.js: 4.3s, application-code: 4.0s)
- GET / 200 in 11.8s (next.js: 2.2s, application-code: 9.6s)
- GET / 200 in 905ms (next.js: 43ms, application-code: 861ms)
- GET / 200 in 7.7s (next.js: 4.6s, application-code: 3.1s)
- GET / 200 in 20.0s (next.js: 6.1s, application-code: 13.8s)
-[browser] Uncaught Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+  To migrate automatically, run:
+  npx @next/codemod@canary middleware-to-proxy .
+
+  Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+
+○ Compiling / ...
+ GET / 200 in 19.3s (next.js: 12.9s, proxy.ts: 4.5s, application-code: 1921ms)
+⚠️  Node.js 20 and below are deprecated and will no longer be supported in future versions of @supabase/supabase-js. Please upgrade to Node.js 22 or later. For more information, visit: https://github.com/orgs/supabase/discussions/45715
+ GET / 200 in 476ms (next.js: 52ms, proxy.ts: 20ms, application-code: 404ms)
+ GET / 200 in 486ms (next.js: 21ms, proxy.ts: 13ms, application-code: 452ms)
+ GET /api/jobs 200 in 4.1s (next.js: 1154ms, proxy.ts: 256ms, application-code: 2.7s)
+ GET /api/jobs 200 in 913ms (next.js: 54ms, proxy.ts: 207ms, application-code: 651ms)
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
 
 - A server/client branch `if (typeof window !== 'undefined')`.
 - Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
@@ -38,2137 +38,881 @@ It can also happen if the client has a browser extension installed which messes 
 https://react.dev/link/hydration-mismatch
 
   ...
-    <HTTPAccessFallbackErrorBoundary pathname="/" notFound={{...}} forbidden={undefined} unauthorized={undefined} ...>
-      <RedirectBoundary>
-        <RedirectErrorBoundary router={{...}}>
-          <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
-            <SegmentViewNode type="page" pagePath="page.tsx">
-              <SegmentTrieNode>
-              <ClientPageRoot Component={function Home} serverProvidedParams={{...}}>
-                <Home params={Promise} searchParams={Promise}>
-                  <main className="min-h-scre...">
-                    <div className="mx-auto gr...">
-                      <aside className="border-b b...">
-                        <div>
-                        <nav className="flex gap-2...">
-                          <LinkComponent>
-                          <LinkComponent>
-                          <LinkComponent href="/jobs/1" className="whitespace...">
-+                           <a
-+                             className="whitespace-nowrap rounded-lg px-3 py-2 text-left text-sm font-medium text-sla..."
-+                             ref={function}
-+                             onClick={function onClick}
-+                             onMouseEnter={function onMouseEnter}
-+                             onTouchStart={function onTouchStart}
-+                             href="/jobs/1"
-+                           >
--                           <span className="whitespace-nowrap px-3 py-2 text-sm text-slate-400">
-                          ...
-                        ...
-                      ...
-            ...
-          ...
-
-    at <unknown> (https://react.dev/link/hydration-mismatch)
-    at a (<anonymous>)
-    at Home (src/app/page.tsx:91:13)
-  89 |             <Link href="/" className="whitespace-nowrap rounded-lg bg-slate-950 px-3 py-2 text-left text-sm font-medium text-white">Today’s Radar</Link>
-  90 |             <Link href="/apply-early" className="whitespace-nowrap rounded-lg px-3 py-2 text-left text-sm font-medium text-slate-500 hover:bg-slate-100">🚨 Apply Early</Link>
-> 91 |             <Link href="/jobs/1" className="whitespace-nowrap rounded-lg px-3 py-2 text-left text-sm font-medium text-slate-500 hover:bg-slate-100">Example job detail</Link>
-     |             ^
-  92 |             <span className="whitespace-nowrap px-3 py-2 text-sm text-slate-400">Saved & activity — coming with persistence</span>
-  93 |             <Link href="/analytics" className="whitespace-nowrap rounded-lg px-3 py-2 text-left text-sm font-medium text-slate-500 hover:bg-slate-100">Analytics</Link>
-  94 |           </nav>
- GET /apply-early 200 in 1362ms (next.js: 457ms, application-code: 904ms)
- GET /jobs/1 200 in 4.5s (next.js: 4.0s, application-code: 445ms)
- GET /jobs/1 200 in 394ms (next.js: 93ms, application-code: 301ms)
- GET /jobs/1 200 in 1093ms (next.js: 114ms, application-code: 979ms)
- GET /analytics 200 in 767ms (next.js: 371ms, application-code: 396ms)
- GET / 200 in 112ms (next.js: 39ms, application-code: 74ms)
- GET / 200 in 846ms (next.js: 677ms, application-code: 169ms)
- GET /settings 200 in 345ms (next.js: 173ms, application-code: 172ms)
- GET / 200 in 141ms (next.js: 31ms, application-code: 111ms)
- GET /jobs/1 200 in 371ms (next.js: 104ms, application-code: 267ms)
- GET /jobs/1 200 in 280ms (next.js: 124ms, application-code: 156ms)
- GET /jobs/1 200 in 171ms (next.js: 40ms, application-code: 131ms)
- GET / 200 in 150ms (next.js: 36ms, application-code: 114ms)
- GET /apply-early 200 in 111ms (next.js: 25ms, application-code: 85ms)
- GET / 200 in 96ms (next.js: 28ms, application-code: 68ms)
- GET /analytics 200 in 125ms (next.js: 19ms, application-code: 105ms)
- GET / 200 in 110ms (next.js: 26ms, application-code: 84ms)
- GET / 200 in 522ms (next.js: 100ms, application-code: 421ms)
- GET /apply-early 200 in 119ms (next.js: 35ms, application-code: 84ms)
- GET / 200 in 80ms (next.js: 15ms, application-code: 65ms)
-✓ Compiled in 3.5s
-✓ Compiled in 4.1s
- GET / 200 in 995ms (next.js: 87ms, application-code: 908ms)
- GET / 200 in 268ms (next.js: 20ms, application-code: 248ms)
-✓ Compiled in 317ms
- GET / 200 in 1363ms (next.js: 974ms, application-code: 389ms)
- GET / 200 in 310ms (next.js: 154ms, application-code: 155ms)
- GET / 200 in 277ms (next.js: 131ms, application-code: 146ms)
- GET / 200 in 720ms (next.js: 115ms, application-code: 605ms)
- GET / 200 in 615ms (next.js: 56ms, application-code: 558ms)
- GET / 200 in 514ms (next.js: 45ms, application-code: 470ms)
- GET / 200 in 493ms (next.js: 94ms, application-code: 399ms)
- GET / 200 in 515ms (next.js: 33ms, application-code: 483ms)
- GET / 200 in 298ms (next.js: 74ms, application-code: 225ms)
- GET / 200 in 167ms (next.js: 46ms, application-code: 121ms)
- GET / 200 in 108ms (next.js: 23ms, application-code: 85ms)
- GET / 200 in 213ms (next.js: 17ms, application-code: 196ms)
- GET / 200 in 250ms (next.js: 22ms, application-code: 229ms)
- GET / 200 in 288ms (next.js: 22ms, application-code: 266ms)
- GET / 200 in 275ms (next.js: 29ms, application-code: 246ms)
- GET / 200 in 121ms (next.js: 28ms, application-code: 94ms)
- GET / 200 in 202ms (next.js: 80ms, application-code: 122ms)
- GET / 200 in 182ms (next.js: 31ms, application-code: 151ms)
- GET / 200 in 479ms (next.js: 33ms, application-code: 446ms)
- GET / 200 in 301ms (next.js: 69ms, application-code: 232ms)
-✓ Compiled in 253ms
- GET / 200 in 636ms (next.js: 80ms, application-code: 555ms)
- GET / 200 in 613ms (next.js: 49ms, application-code: 564ms)
- GET / 200 in 435ms (next.js: 127ms, application-code: 308ms)
- GET / 200 in 264ms (next.js: 33ms, application-code: 231ms)
- GET / 200 in 109ms (next.js: 25ms, application-code: 84ms)
- GET / 200 in 954ms (next.js: 118ms, application-code: 835ms)
- GET /notifications 200 in 1919ms (next.js: 1772ms, application-code: 147ms)
-✓ Compiled in 763ms
- GET /notifications 200 in 1826ms (next.js: 764ms, application-code: 1062ms)
- GET /notifications 200 in 799ms (next.js: 85ms, application-code: 713ms)
- GET /notifications 200 in 393ms (next.js: 108ms, application-code: 285ms)
- GET /notifications 200 in 652ms (next.js: 93ms, application-code: 559ms)
- GET /notifications 200 in 532ms (next.js: 89ms, application-code: 443ms)
- GET /notifications 200 in 626ms (next.js: 36ms, application-code: 590ms)
- GET /notifications 200 in 647ms (next.js: 89ms, application-code: 558ms)
- GET /notifications 200 in 564ms (next.js: 103ms, application-code: 462ms)
- GET /notifications 200 in 233ms (next.js: 65ms, application-code: 168ms)
- GET /notifications 200 in 467ms (next.js: 84ms, application-code: 383ms)
- GET /notifications 200 in 624ms (next.js: 43ms, application-code: 581ms)
- GET /notifications 200 in 662ms (next.js: 81ms, application-code: 581ms)
- GET /notifications 200 in 494ms (next.js: 85ms, application-code: 409ms)
- GET /notifications 200 in 552ms (next.js: 62ms, application-code: 490ms)
- GET /notifications 200 in 646ms (next.js: 47ms, application-code: 599ms)
- GET /notifications 200 in 655ms (next.js: 55ms, application-code: 599ms)
- GET /notifications 200 in 689ms (next.js: 47ms, application-code: 642ms)
- GET /notifications 200 in 685ms (next.js: 101ms, application-code: 584ms)
- GET /notifications 200 in 723ms (next.js: 119ms, application-code: 604ms)
- GET /notifications 200 in 917ms (next.js: 100ms, application-code: 817ms)
- GET /notifications 200 in 1239ms (next.js: 96ms, application-code: 1143ms)
- GET /notifications 200 in 1048ms (next.js: 195ms, application-code: 853ms)
- GET /notifications 200 in 435ms (next.js: 79ms, application-code: 356ms)
- GET /notifications 200 in 850ms (next.js: 269ms, application-code: 581ms)
- GET /notifications 200 in 531ms (next.js: 100ms, application-code: 432ms)
- GET /notifications 200 in 869ms (next.js: 104ms, application-code: 765ms)
- GET /notifications 200 in 684ms (next.js: 247ms, application-code: 437ms)
- GET /settings 200 in 372ms (next.js: 152ms, application-code: 220ms)
- GET / 200 in 132ms (next.js: 64ms, application-code: 68ms)
- GET /notifications 200 in 85ms (next.js: 15ms, application-code: 70ms)
- GET /settings 200 in 288ms (next.js: 48ms, application-code: 240ms)
- GET / 200 in 249ms (next.js: 55ms, application-code: 194ms)
- GET /sources 200 in 1962ms (next.js: 1698ms, application-code: 264ms)
- GET / 200 in 308ms (next.js: 144ms, application-code: 164ms)
- GET / 200 in 701ms (next.js: 16ms, application-code: 686ms)
-✓ Compiled in 4.2s
- GET / 200 in 15.2s (next.js: 10.8s, application-code: 4.4s)
- GET / 200 in 93ms (next.js: 16ms, application-code: 77ms)
- GET / 200 in 341ms (next.js: 29ms, application-code: 312ms)
- GET / 200 in 703ms (next.js: 33ms, application-code: 669ms)
- GET / 200 in 759ms (next.js: 84ms, application-code: 675ms)
- GET /analytics 200 in 156ms (next.js: 69ms, application-code: 87ms)
-⚠ The "middleware" file convention is deprecated. Please use "proxy" instead.
-
-  To migrate automatically, run:
-  npx @next/codemod@canary middleware-to-proxy .
-
-  Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
-⨯ ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-[31m[1m>[0m [90m1 |[0m [36mimport[0m { createServerClient } [36mfrom[0m [32m"@supabase/ssr"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m2 |[0m [36mimport[0m { [33mNextResponse[0m, [36mtype[0m [33mNextRequest[0m } [36mfrom[0m [32m"next/server"[0m;
-  [90m3 |[0m
-  [90m4 |[0m [36mexport[0m [36masync[0m [36mfunction[0m middleware(request: [33mNextRequest[0m) {
-
-
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-⨯ ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-[31m[1m>[0m [90m1 |[0m [36mimport[0m { createServerClient } [36mfrom[0m [32m"@supabase/ssr"[0m;
-  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-  [90m2 |[0m [36mimport[0m { [33mNextResponse[0m, [36mtype[0m [33mNextRequest[0m } [36mfrom[0m [32m"next/server"[0m;
-  [90m3 |[0m
-  [90m4 |[0m [36mexport[0m [36masync[0m [36mfunction[0m middleware(request: [33mNextRequest[0m) {
-
-
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-○ Compiling /_error ...
- GET /analytics 404 in 10.0s (next.js: -4653.1ms, proxy.ts: 9.9s, application-code: 4.8s)
-[browser] Uncaught Error: ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-    at <unknown> (Error: ./src/middleware.ts:1:1)
-    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
-    at <unknown> (Error: (./src/middleware.ts:1:1)
-    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-⨯ Error: Cannot find module '@supabase/ssr'
-    at <unknown> (.next\dev\server\edge\chunks\[root-of-the-server]__13jvavz._.js:24:15)
-    at module evaluation (.next\dev\server\edge\chunks\[root-of-the-server]__13jvavz._.js:27:3)
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
- GET /analytics 500 in 2.1s (next.js: -124.1ms, proxy.ts: 2.0s, application-code: 220ms)
-[browser] Uncaught Error: ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-    at <unknown> (Error: ./src/middleware.ts:1:1)
-    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
-    at <unknown> (Error: (./src/middleware.ts:1:1)
-    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-[browser] ./src/middleware.ts:1:1
-Error: Module not found: Can't resolve '@supabase/ssr'
-> 1 | import { createServerClient } from "@supabase/ssr";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { NextResponse, type NextRequest } from "next/server";
-  3 |
-  4 | export async function middleware(request: NextRequest) {
-
-https://nextjs.org/docs/messages/module-not-found 
-✓ Compiled in 9.6s
- GET /analytics 200 in 4.9s (next.js: 1058ms, proxy.ts: 2.0s, application-code: 1773ms)
- GET / 200 in 321ms (next.js: 99ms, proxy.ts: 30ms, application-code: 192ms)
- GET /sources 200 in 153ms (next.js: 61ms, proxy.ts: 14ms, application-code: 78ms)
- GET / 200 in 183ms (next.js: 32ms, proxy.ts: 19ms, application-code: 133ms)
- GET / 200 in 5.0s (next.js: 1913ms, proxy.ts: 136ms, application-code: 3.0s)
- GET / 200 in 1238ms (next.js: 79ms, proxy.ts: 13ms, application-code: 1146ms)
- GET / 200 in 5.7s (next.js: 2.6s, proxy.ts: 303ms, application-code: 2.9s)
- GET / 200 in 1834ms (next.js: 320ms, proxy.ts: 353ms, application-code: 1161ms)
- GET / 200 in 1502ms (next.js: 19ms, proxy.ts: 11ms, application-code: 1471ms)
- GET / 200 in 1695ms (next.js: 301ms, proxy.ts: 139ms, application-code: 1254ms)
- GET / 200 in 1262ms (next.js: 150ms, proxy.ts: 132ms, application-code: 981ms)
- GET / 200 in 510ms (next.js: 169ms, proxy.ts: 64ms, application-code: 277ms)
- GET / 200 in 678ms (next.js: 113ms, proxy.ts: 45ms, application-code: 519ms)
- GET / 200 in 573ms (next.js: 46ms, proxy.ts: 50ms, application-code: 477ms)
- GET / 200 in 471ms (next.js: 87ms, proxy.ts: 83ms, application-code: 302ms)
- GET / 200 in 205ms (next.js: 61ms, proxy.ts: 19ms, application-code: 126ms)
- GET / 200 in 229ms (next.js: 56ms, proxy.ts: 23ms, application-code: 150ms)
- GET / 200 in 460ms (next.js: 65ms, proxy.ts: 19ms, application-code: 376ms)
- GET / 200 in 286ms (next.js: 75ms, proxy.ts: 26ms, application-code: 185ms)
- GET / 200 in 232ms (next.js: 75ms, proxy.ts: 24ms, application-code: 132ms)
- GET / 200 in 178ms (next.js: 40ms, proxy.ts: 13ms, application-code: 125ms)
- GET / 200 in 361ms (next.js: 47ms, proxy.ts: 15ms, application-code: 300ms)
- GET / 200 in 319ms (next.js: 68ms, proxy.ts: 23ms, application-code: 228ms)
- GET / 200 in 350ms (next.js: 51ms, proxy.ts: 28ms, application-code: 272ms)
- GET / 200 in 164ms (next.js: 26ms, proxy.ts: 11ms, application-code: 128ms)
- GET / 200 in 372ms (next.js: 25ms, proxy.ts: 15ms, application-code: 332ms)
- GET / 200 in 269ms (next.js: 51ms, proxy.ts: 24ms, application-code: 195ms)
- GET / 200 in 210ms (next.js: 74ms, proxy.ts: 15ms, application-code: 121ms)
- GET / 200 in 257ms (next.js: 39ms, proxy.ts: 16ms, application-code: 202ms)
- GET / 200 in 148ms (next.js: 32ms, proxy.ts: 13ms, application-code: 103ms)
- GET / 200 in 188ms (next.js: 48ms, proxy.ts: 13ms, application-code: 127ms)
- GET / 200 in 222ms (next.js: 64ms, proxy.ts: 18ms, application-code: 140ms)
- GET / 200 in 221ms (next.js: 20ms, proxy.ts: 9ms, application-code: 191ms)
- GET / 200 in 202ms (next.js: 30ms, proxy.ts: 26ms, application-code: 146ms)
-✓ Compiled in 5.6s
- GET / 200 in 24.8s (next.js: 10.5s, proxy.ts: 1729ms, application-code: 12.5s)
- GET / 200 in 6.1s (next.js: 3.9s, proxy.ts: 215ms, application-code: 1991ms)
- GET / 200 in 1147ms (next.js: 242ms, proxy.ts: 9ms, application-code: 895ms)
- GET / 200 in 1547ms (next.js: 138ms, proxy.ts: 30ms, application-code: 1379ms)
- GET /settings 200 in 319ms (next.js: 137ms, proxy.ts: 21ms, application-code: 160ms)
-⚠️  Node.js 20 and below are deprecated and will no longer be supported in future versions of @supabase/supabase-js. Please upgrade to Node.js 22 or later. For more information, visit: https://github.com/orgs/supabase/discussions/45715
- GET /api/preferences 401 in 2.7s (next.js: 2.3s, proxy.ts: 56ms, application-code: 322ms)
- GET /api/preferences 401 in 417ms (next.js: 131ms, proxy.ts: 70ms, application-code: 215ms)
- GET /settings 200 in 556ms (next.js: 85ms, proxy.ts: 65ms, application-code: 406ms)
- GET / 200 in 491ms (next.js: 345ms, proxy.ts: 35ms, application-code: 110ms)
- GET / 200 in 2.5s (next.js: 58ms, proxy.ts: 29ms, application-code: 2.4s)
- GET / 200 in 738ms (next.js: 97ms, proxy.ts: 42ms, application-code: 599ms)
- GET / 200 in 291ms (next.js: 65ms, proxy.ts: 64ms, application-code: 163ms)
- GET /apply-early 200 in 478ms (next.js: 166ms, proxy.ts: 26ms, application-code: 286ms)
- GET /apply-early 200 in 471ms (next.js: 60ms, proxy.ts: 21ms, application-code: 389ms)
- GET / 200 in 285ms (next.js: 91ms, proxy.ts: 35ms, application-code: 159ms)
- GET / 200 in 327ms (next.js: 96ms, proxy.ts: 55ms, application-code: 175ms)
- GET / 200 in 5.3s (next.js: 4.9s, proxy.ts: 14ms, application-code: 387ms)
-✓ Compiled in 8.5s
- GET / 200 in 1590ms (next.js: 50ms, proxy.ts: 38ms, application-code: 1503ms)
- GET / 200 in 3.6s (next.js: 3.2s, proxy.ts: 14ms, application-code: 407ms)
-✓ Compiled in 11.6s
-✓ Compiled in 2.4s
- GET / 200 in 4.4s (next.js: 100ms, proxy.ts: 34ms, application-code: 4.3s)
- GET / 200 in 2.2s (next.js: 45ms, proxy.ts: 10ms, application-code: 2.1s)
- GET / 200 in 1233ms (next.js: 496ms, proxy.ts: 271ms, application-code: 466ms)
- GET / 200 in 599ms (next.js: 156ms, proxy.ts: 30ms, application-code: 413ms)
- GET /apply-early 200 in 194ms (next.js: 60ms, proxy.ts: 24ms, application-code: 111ms)
- GET / 200 in 129ms (next.js: 38ms, proxy.ts: 14ms, application-code: 77ms)
- GET /analytics 200 in 194ms (next.js: 69ms, proxy.ts: 13ms, application-code: 112ms)
- GET / 200 in 123ms (next.js: 33ms, proxy.ts: 19ms, application-code: 70ms)
-✓ Compiled in 2.2s
-✓ Compiled in 3.1s
-✓ Compiled in 1628ms
- GET / 200 in 996ms (next.js: 126ms, proxy.ts: 16ms, application-code: 854ms)
- GET / 200 in 411ms (next.js: 189ms, proxy.ts: 85ms, application-code: 137ms)
- GET / 200 in 137ms (next.js: 39ms, proxy.ts: 15ms, application-code: 84ms)
- GET / 200 in 302ms (next.js: 30ms, proxy.ts: 18ms, application-code: 254ms)
- GET /jobs/3 200 in 592ms (next.js: 353ms, proxy.ts: 25ms, application-code: 214ms)
- GET / 200 in 99ms (next.js: 19ms, proxy.ts: 9ms, application-code: 70ms)
- GET /settings 200 in 297ms (next.js: 107ms, proxy.ts: 46ms, application-code: 143ms)
- GET /api/preferences 401 in 163ms (next.js: 34ms, proxy.ts: 57ms, application-code: 72ms)
- GET /api/preferences 401 in 117ms (next.js: 53ms, proxy.ts: 25ms, application-code: 38ms)
- GET / 200 in 89ms (next.js: 21ms, proxy.ts: 13ms, application-code: 54ms)
-✓ Compiled in 2.3s
-✓ Compiled in 2.6s
-✓ Compiled in 4s
- GET / 200 in 777ms (next.js: 443ms, proxy.ts: 14ms, application-code: 320ms)
- GET / 200 in 217ms (next.js: 36ms, proxy.ts: 21ms, application-code: 161ms)
- GET / 200 in 211ms (next.js: 26ms, proxy.ts: 17ms, application-code: 168ms)
- GET / 200 in 145ms (next.js: 24ms, proxy.ts: 16ms, application-code: 105ms)
-✓ Compiled in 2.7s
- GET / 200 in 3.2s (next.js: 1685ms, proxy.ts: 19ms, application-code: 1518ms)
-✓ Compiled in 1890ms
- GET / 200 in 1586ms (next.js: 123ms, proxy.ts: 11ms, application-code: 1452ms)
- GET / 200 in 1661ms (next.js: 35ms, proxy.ts: 10ms, application-code: 1616ms)
- GET / 200 in 202ms (next.js: 63ms, proxy.ts: 31ms, application-code: 108ms)
-⚠️  Node.js 20 and below are deprecated and will no longer be supported in future versions of @supabase/supabase-js. Please upgrade to Node.js 22 or later. For more information, visit: https://github.com/orgs/supabase/discussions/45715
- GET /api/jobs 200 in 1008ms (next.js: 723ms, proxy.ts: 13ms, application-code: 272ms)
- GET /api/jobs 200 in 460ms (next.js: 138ms, proxy.ts: 28ms, application-code: 294ms)
- GET / 200 in 189ms (next.js: 32ms, proxy.ts: 15ms, application-code: 142ms)
-✓ Compiled in 2.7s
-○ Compiling middleware ...
- GET / 200 in 23.2s (next.js: 10.1s, proxy.ts: 4.6s, application-code: 8.6s)
- GET / 200 in 823ms (next.js: 80ms, proxy.ts: 27ms, application-code: 716ms)
- GET / 200 in 651ms (next.js: 276ms, proxy.ts: 65ms, application-code: 309ms)
- GET / 200 in 267ms (next.js: 104ms, proxy.ts: 18ms, application-code: 145ms)
- GET / 200 in 245ms (next.js: 70ms, proxy.ts: 34ms, application-code: 141ms)
- GET / 200 in 438ms (next.js: 173ms, proxy.ts: 28ms, application-code: 237ms)
- GET / 200 in 495ms (next.js: 175ms, proxy.ts: 21ms, application-code: 299ms)
- GET / 200 in 321ms (next.js: 64ms, proxy.ts: 75ms, application-code: 182ms)
- GET / 200 in 461ms (next.js: 196ms, proxy.ts: 21ms, application-code: 243ms)
- GET / 200 in 544ms (next.js: 95ms, proxy.ts: 26ms, application-code: 424ms)
- GET / 200 in 629ms (next.js: 31ms, proxy.ts: 8ms, application-code: 590ms)
- GET / 200 in 525ms (next.js: 178ms, proxy.ts: 28ms, application-code: 320ms)
- GET / 200 in 439ms (next.js: 25ms, proxy.ts: 44ms, application-code: 370ms)
- GET / 200 in 334ms (next.js: 97ms, proxy.ts: 44ms, application-code: 193ms)
- GET / 200 in 737ms (next.js: 34ms, proxy.ts: 36ms, application-code: 668ms)
- GET / 200 in 275ms (next.js: 117ms, proxy.ts: 50ms, application-code: 107ms)
- GET / 200 in 129ms (next.js: 53ms, proxy.ts: 10ms, application-code: 66ms)
- GET / 200 in 279ms (next.js: 76ms, proxy.ts: 12ms, application-code: 192ms)
- GET / 200 in 357ms (next.js: 114ms, proxy.ts: 19ms, application-code: 224ms)
- GET / 200 in 233ms (next.js: 79ms, proxy.ts: 24ms, application-code: 130ms)
- GET / 200 in 177ms (next.js: 72ms, proxy.ts: 13ms, application-code: 92ms)
- GET / 200 in 174ms (next.js: 16ms, proxy.ts: 10ms, application-code: 148ms)
- GET / 200 in 418ms (next.js: 157ms, proxy.ts: 34ms, application-code: 227ms)
- GET / 200 in 252ms (next.js: 54ms, proxy.ts: 14ms, application-code: 184ms)
- GET / 200 in 805ms (next.js: 80ms, proxy.ts: 61ms, application-code: 665ms)
- GET / 200 in 915ms (next.js: 335ms, proxy.ts: 103ms, application-code: 477ms)
- GET / 200 in 425ms (next.js: 136ms, proxy.ts: 41ms, application-code: 247ms)
- GET / 200 in 545ms (next.js: 47ms, proxy.ts: 16ms, application-code: 483ms)
- GET / 200 in 1368ms (next.js: 563ms, proxy.ts: 101ms, application-code: 703ms)
- GET / 200 in 690ms (next.js: 137ms, proxy.ts: 108ms, application-code: 445ms)
- GET / 200 in 728ms (next.js: 383ms, proxy.ts: 21ms, application-code: 324ms)
- GET / 200 in 593ms (next.js: 26ms, proxy.ts: 15ms, application-code: 552ms)
- GET / 200 in 530ms (next.js: 170ms, proxy.ts: 89ms, application-code: 271ms)
- GET / 200 in 913ms (next.js: 151ms, proxy.ts: 52ms, application-code: 710ms)
-⚠️  Node.js 20 and below are deprecated and will no longer be supported in future versions of @supabase/supabase-js. Please upgrade to Node.js 22 or later. For more information, visit: https://github.com/orgs/supabase/discussions/45715
- GET /api/jobs 200 in 587ms (next.js: 337ms, proxy.ts: 28ms, application-code: 222ms)
- GET /api/jobs 200 in 64ms (next.js: 20ms, proxy.ts: 18ms, application-code: 26ms)
- GET / 200 in 12.2s (next.js: 5.3s, proxy.ts: 297ms, application-code: 6.6s)
- GET / 200 in 2.9s (next.js: 459ms, proxy.ts: 21ms, application-code: 2.4s)
- GET / 200 in 1359ms (next.js: 998ms, proxy.ts: 12ms, application-code: 349ms)
- GET / 200 in 1399ms (next.js: 104ms, proxy.ts: 14ms, application-code: 1281ms)
- GET / 200 in 1580ms (next.js: 196ms, proxy.ts: 30ms, application-code: 1354ms)
- GET / 200 in 544ms (next.js: 36ms, proxy.ts: 34ms, application-code: 474ms)
- GET / 200 in 548ms (next.js: 33ms, proxy.ts: 14ms, application-code: 501ms)
- GET / 200 in 471ms (next.js: 68ms, proxy.ts: 18ms, application-code: 384ms)
- GET / 200 in 220ms (next.js: 86ms, proxy.ts: 12ms, application-code: 122ms)
- GET / 200 in 626ms (next.js: 478ms, proxy.ts: 49ms, application-code: 99ms)
- GET / 200 in 194ms (next.js: 38ms, proxy.ts: 13ms, application-code: 144ms)
- GET / 200 in 338ms (next.js: 58ms, proxy.ts: 14ms, application-code: 267ms)
- GET / 200 in 469ms (next.js: 78ms, proxy.ts: 14ms, application-code: 377ms)
- GET / 200 in 327ms (next.js: 30ms, proxy.ts: 21ms, application-code: 276ms)
- GET / 200 in 249ms (next.js: 81ms, proxy.ts: 20ms, application-code: 148ms)
- GET / 200 in 143ms (next.js: 19ms, proxy.ts: 12ms, application-code: 112ms)
- GET / 200 in 320ms (next.js: 90ms, proxy.ts: 23ms, application-code: 206ms)
- GET / 200 in 152ms (next.js: 36ms, proxy.ts: 14ms, application-code: 102ms)
- GET / 200 in 146ms (next.js: 17ms, proxy.ts: 11ms, application-code: 117ms)
- GET / 200 in 238ms (next.js: 18ms, proxy.ts: 8ms, application-code: 211ms)
- GET / 200 in 231ms (next.js: 29ms, proxy.ts: 11ms, application-code: 191ms)
- GET / 200 in 278ms (next.js: 28ms, proxy.ts: 12ms, application-code: 238ms)
- GET / 200 in 514ms (next.js: 82ms, proxy.ts: 12ms, application-code: 420ms)
- GET / 200 in 339ms (next.js: 117ms, proxy.ts: 26ms, application-code: 195ms)
- GET / 200 in 254ms (next.js: 21ms, proxy.ts: 20ms, application-code: 213ms)
- GET / 200 in 288ms (next.js: 170ms, proxy.ts: 49ms, application-code: 68ms)
- GET / 200 in 1075ms (next.js: 70ms, proxy.ts: 9ms, application-code: 996ms)
- GET / 200 in 883ms (next.js: 197ms, proxy.ts: 349ms, application-code: 337ms)
- GET / 200 in 820ms (next.js: 148ms, proxy.ts: 88ms, application-code: 585ms)
- GET / 200 in 668ms (next.js: 110ms, proxy.ts: 97ms, application-code: 461ms)
- GET / 200 in 617ms (next.js: 151ms, proxy.ts: 90ms, application-code: 376ms)
- GET / 200 in 670ms (next.js: 460ms, proxy.ts: 58ms, application-code: 152ms)
- GET / 200 in 794ms (next.js: 24ms, proxy.ts: 13ms, application-code: 757ms)
- GET / 200 in 658ms (next.js: 333ms, proxy.ts: 69ms, application-code: 256ms)
- GET / 200 in 673ms (next.js: 163ms, proxy.ts: 52ms, application-code: 459ms)
- GET / 200 in 940ms (next.js: 594ms, proxy.ts: 140ms, application-code: 207ms)
- GET / 200 in 1168ms (next.js: 30ms, proxy.ts: 28ms, application-code: 1110ms)
-⚠️  Node.js 20 and below are deprecated and will no longer be supported in future versions of @supabase/supabase-js. Please upgrade to Node.js 22 or later. For more information, visit: https://github.com/orgs/supabase/discussions/45715
- GET /api/jobs 200 in 868ms (next.js: 630ms, proxy.ts: 31ms, application-code: 207ms)
- GET /api/jobs 200 in 120ms (next.js: 34ms, proxy.ts: 20ms, application-code: 66ms)
- GET /apply-early 200 in 222ms (next.js: 79ms, proxy.ts: 18ms, application-code: 125ms)
- GET / 200 in 188ms (next.js: 39ms, proxy.ts: 24ms, application-code: 126ms)
- GET /api/jobs 200 in 125ms (next.js: 23ms, proxy.ts: 34ms, application-code: 69ms)
- GET /api/jobs 200 in 235ms (next.js: 63ms, proxy.ts: 51ms, application-code: 121ms)
- GET / 200 in 1384ms (next.js: 532ms, proxy.ts: 293ms, application-code: 558ms)
- GET / 200 in 441ms (next.js: 53ms, proxy.ts: 33ms, application-code: 355ms)
- GET / 200 in 140ms (next.js: 33ms, proxy.ts: 44ms, application-code: 63ms)
- GET / 200 in 160ms (next.js: 53ms, proxy.ts: 18ms, application-code: 88ms)
- GET / 200 in 213ms (next.js: 37ms, proxy.ts: 20ms, application-code: 156ms)
- GET / 200 in 306ms (next.js: 33ms, proxy.ts: 23ms, application-code: 250ms)
- GET / 200 in 174ms (next.js: 27ms, proxy.ts: 15ms, application-code: 132ms)
- GET / 200 in 266ms (next.js: 52ms, proxy.ts: 18ms, application-code: 196ms)
- GET / 200 in 212ms (next.js: 44ms, proxy.ts: 32ms, application-code: 137ms)
- GET / 200 in 184ms (next.js: 50ms, proxy.ts: 14ms, application-code: 120ms)
- GET / 200 in 324ms (next.js: 37ms, proxy.ts: 18ms, application-code: 268ms)
- GET / 200 in 299ms (next.js: 31ms, proxy.ts: 15ms, application-code: 254ms)
- GET / 200 in 311ms (next.js: 34ms, proxy.ts: 20ms, application-code: 257ms)
- GET / 200 in 362ms (next.js: 34ms, proxy.ts: 19ms, application-code: 309ms)
- GET / 200 in 404ms (next.js: 53ms, proxy.ts: 21ms, application-code: 330ms)
- GET / 200 in 241ms (next.js: 55ms, proxy.ts: 29ms, application-code: 157ms)
- GET / 200 in 339ms (next.js: 33ms, proxy.ts: 23ms, application-code: 282ms)
- GET / 200 in 215ms (next.js: 48ms, proxy.ts: 22ms, application-code: 145ms)
- GET / 200 in 250ms (next.js: 41ms, proxy.ts: 26ms, application-code: 183ms)
- GET / 200 in 634ms (next.js: 74ms, proxy.ts: 41ms, application-code: 520ms)
- GET / 200 in 719ms (next.js: 87ms, proxy.ts: 63ms, application-code: 569ms)
- GET / 200 in 316ms (next.js: 120ms, proxy.ts: 37ms, application-code: 158ms)
- GET / 200 in 803ms (next.js: 19ms, proxy.ts: 20ms, application-code: 764ms)
- GET / 200 in 942ms (next.js: 110ms, proxy.ts: 49ms, application-code: 783ms)
- GET / 200 in 463ms (next.js: 232ms, proxy.ts: 48ms, application-code: 182ms)
- GET / 200 in 210ms (next.js: 47ms, proxy.ts: 25ms, application-code: 138ms)
- GET / 200 in 452ms (next.js: 47ms, proxy.ts: 25ms, application-code: 380ms)
- GET / 200 in 432ms (next.js: 44ms, proxy.ts: 23ms, application-code: 364ms)
- GET / 200 in 225ms (next.js: 35ms, proxy.ts: 26ms, application-code: 164ms)
- GET / 200 in 609ms (next.js: 61ms, proxy.ts: 18ms, application-code: 529ms)
- GET / 200 in 244ms (next.js: 43ms, proxy.ts: 42ms, application-code: 160ms)
- GET / 200 in 350ms (next.js: 51ms, proxy.ts: 24ms, application-code: 275ms)
- GET / 200 in 389ms (next.js: 28ms, proxy.ts: 27ms, application-code: 334ms)
- GET / 200 in 239ms (next.js: 30ms, proxy.ts: 16ms, application-code: 193ms)
- GET / 200 in 278ms (next.js: 64ms, proxy.ts: 53ms, application-code: 161ms)
+    <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+      <LoadingBoundary name="/" loading={null}>
+        <HTTPAccessFallbackBoundary notFound={{...}} forbidden={undefined} unauthorized={undefined}>
+          <HTTPAccessFallbackErrorBoundary pathname="/" notFound={{...}} forbidden={undefined} unauthorized={undefined} ...>
+            <RedirectBoundary>
+              <RedirectErrorBoundary router={{...}}>
+                <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+                  <SegmentViewNode type="page" pagePath="page.tsx">
+                    <SegmentTrieNode>
+                    <ClientPageRoot Component={function Home} serverProvidedParams={{...}}>
+                      <Home params={Promise} searchParams={Promise}>
+                        <main className="min-h-scre...">
+                          <div className="mx-auto gr...">
+                            <aside className="border-b b...">
+                              <div>
+                              <nav>
+                              <details>
+                              <div>
+                              <LinkComponent href="/settings" className="mt-8 text-...">
+                                <a
+                                  className="mt-8 text-sm font-medium text-slate-500"
+                                  ref={function}
+                                  onClick={function onClick}
+                                  onMouseEnter={function onMouseEnter}
+                                  onTouchStart={function onTouchStart}
+                                  href="/settings"
+-                                 data-dom-id="tdyh-62"
+                                >
++                                 ⚙ Preferences
+                            <section
+                              className="p-5 sm:p-8 lg:p-10"
+-                             data-dom-id="tdyh-63"
+                            >
+                              <header
+                                className="flex flex-col justify-between gap-6 md:flex-row md:items-start"
+-                               data-dom-id="tdyh-64"
+                              >
+                                <div
+-                                 data-dom-id="tdyh-65"
+                                >
+                                  <p
+                                    className="text-xs font-bold uppercase tracking-[0.18em] text-[#ff5b35]"
+-                                   data-dom-id="tdyh-66"
+                                  >
++                                   Friday · 15 August
+                                  <h1
+                                    className="mt-2 text-3xl font-black tracking-tight sm:text-4xl"
+-                                   data-dom-id="tdyh-67"
+                                  >
++                                   {"Today's Job Radar"}
+                                  <p
+                                    className="mt-2 text-slate-500"
+-                                   data-dom-id="tdyh-68"
+                                  >
++                                   A focused queue for your next 15 minutes.
+                                <button
+                                  onClick={function onClick}
+                                  className="rounded-lg bg-slate-950 px-4 py-2.5 text-sm font-bold text-white"
+-                                 data-dom-id="tdyh-69"
+                                >
++                                 + Add job URL
+                              <div
+                                className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-5"
+-                               data-dom-id="tdyh-70"
+                              >
+                                <div
+                                  className="rounded-xl border p-4 border-slate-200 bg-white"
+-                                 data-dom-id="tdyh-71"
+                                >
+                                  <p
+                                    className="text-2xl font-black"
+-                                   data-dom-id="tdyh-72"
+                                  >
++                                   37
+                                  <p
+                                    className="mt-1 text-xs font-medium text-slate-500"
+-                                   data-dom-id="tdyh-73"
+                                  >
++                                   New jobs
+                                <div
+                                  className="rounded-xl border p-4 border-orange-200 bg-orange-50"
+-                                 data-dom-id="tdyh-74"
+                                >
+                                  <p
+                                    className="text-2xl font-black"
+-                                   data-dom-id="tdyh-75"
+                                  >
++                                   6
+                                  <p
+                                    className="mt-1 text-xs font-medium text-slate-500"
+-                                   data-dom-id="tdyh-76"
+                                  >
++                                   Very promising
+                                <div
+                                  className="rounded-xl border p-4 border-slate-200 bg-white"
+-                                 data-dom-id="tdyh-77"
+                                >
+                                  <p
+                                    className="text-2xl font-black"
+-                                   data-dom-id="tdyh-78"
+                                  >
++                                   9
+                                  <p
+                                    className="mt-1 text-xs font-medium text-slate-500"
+-                                   data-dom-id="tdyh-79"
+                                  >
++                                   Under 25 applicants
+                                <div
+                                  className="rounded-xl border p-4 border-slate-200 bg-white"
+-                                 data-dom-id="tdyh-80"
+                                >
+                                  <p
+                                    className="text-2xl font-black"
+-                                   data-dom-id="tdyh-81"
+                                  >
++                                   14
+                                  <p
+                                    className="mt-1 text-xs font-medium text-slate-500"
+-                                   data-dom-id="tdyh-82"
+                                  >
++                                   Posted in 24h
+                                <div
+                                  className="rounded-xl border p-4 border-slate-200 bg-white"
+-                                 data-dom-id="tdyh-83"
+                                >
+                                  <p
+                                    className="text-2xl font-black"
+-                                   data-dom-id="tdyh-84"
+                                  >
++                                   21
+                                  <p
+                                    className="mt-1 text-xs font-medium text-slate-500"
+-                                   data-dom-id="tdyh-85"
+                                  >
++                                   Remote
+                              <div
+                                className="mt-10 rounded-2xl border border-orange-200 bg-[#fff8f5] p-5 sm:p-6"
+-                               data-dom-id="tdyh-86"
+                              >
+                                <div
+                                  className="flex flex-wrap items-center justify-between gap-4"
+-                                 data-dom-id="tdyh-87"
+                                >
+                                  <div
+-                                   data-dom-id="tdyh-88"
+                                  >
+                                    <p
+                                      className="text-sm font-black text-[#d84320]"
+-                                     data-dom-id="tdyh-89"
+                                    >
++                                     🔥 APPLY EARLY
+                                    <h2
+                                      className="mt-1 text-xl font-black"
+-                                     data-dom-id="tdyh-90"
+                                    >
++                                     The window is open
+                                    <p
+                                      className="mt-1 text-sm text-slate-600"
+-                                     data-dom-id="tdyh-91"
+                                    >
++                                     Fresh listings with low competition and a strong signal match.
+                                  <span
+                                    className="rounded-full bg-white px-3 py-1 text-xs font-bold text-[#d84320]"
+-                                   data-dom-id="tdyh-92"
+                                  >
++                                   6 opportunities
+                              <div
+                                className="mt-7 flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between"
+-                               data-dom-id="tdyh-93"
+                              >
+                                <div
+                                  className="flex flex-wrap gap-2"
+-                                 data-dom-id="tdyh-94"
+                                >
+                                  <input
+                                    value=""
+                                    onChange={function onChange}
+                                    placeholder="Search roles, companies, skills…"
+                                    className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm ou..."
+-                                   data-dom-id="tdyh-95"
+                                  >
+                                  <button
+                                    onClick={function onClick}
+                                    className="rounded-lg border px-3 py-2 text-sm font-medium border-slate-200 bg-white"
+-                                   data-dom-id="tdyh-96"
+                                  >
++                                   Remote
+                                  <button
+                                    onClick={function onClick}
+                                    className="rounded-lg border px-3 py-2 text-sm font-medium border-slate-200 bg-white"
+-                                   data-dom-id="tdyh-97"
+                                  >
++                                   Under 25 applicants
+                                <label
+                                  className="text-sm text-slate-500"
+-                                 data-dom-id="tdyh-98"
+                                >
+                                  <select
+                                    value="score"
+                                    onChange={function onChange}
+                                    className="ml-1 rounded-lg border border-slate-200 bg-white px-2 py-2 text-sm font..."
+-                                   data-dom-id="tdyh-99"
+                                  >
+                                    <option
+                                      value="score"
+-                                     data-dom-id="tdyh-100"
+                                    >
++                                     Opportunity score
+                                    <option
+                                      value="newest"
+-                                     data-dom-id="tdyh-101"
+                                    >
++                                     Newest
+                                    <option
+                                      value="applicants"
+-                                     data-dom-id="tdyh-102"
+                                    >
++                                     Fewest applicants
+                              <div
+                                className="mt-5 overflow-hidden rounded-xl border border-slate-200 bg-white"
+-                               data-dom-id="tdyh-103"
+                              >
+                                <div
+                                  className="hidden grid-cols-[1.8fr_1fr_0.8fr_0.7fr] gap-4 border-b border-slate-100 ..."
+-                                 data-dom-id="tdyh-104"
+                                >
+                                  <span
+-                                   data-dom-id="tdyh-105"
+                                  >
++                                   Opportunity
+                                  <span
+-                                   data-dom-id="tdyh-106"
+                                  >
++                                   Location
+                                  <span
+-                                   data-dom-id="tdyh-107"
+                                  >
++                                   Competition
+                                  <span
+-                                   data-dom-id="tdyh-108"
+                                  >
++                                   Score
+                                <article
+                                  className="grid gap-4 border-b border-slate-100 p-5 last:border-0 md:grid-cols-[1.8f..."
+-                                 data-dom-id="tdyh-109"
+                                >
+                                  <div
+-                                   data-dom-id="tdyh-110"
+                                  >
+                                    <div
+                                      className="flex flex-wrap items-center gap-2"
+-                                     data-dom-id="tdyh-111"
+                                    >
+                                      <LinkComponent href="/jobs/1" className="font-bold ...">
+                                        <a
+                                          className="font-bold hover:text-[#d84320]"
+                                          ref={function}
+                                          onClick={function onClick}
+                                          onMouseEnter={function onMouseEnter}
+                                          onTouchStart={function onTouchStart}
+                                          href="/jobs/1"
+-                                         data-dom-id="tdyh-112"
+                                        >
++                                         Junior Java Developer
+                                      <span
+                                        className="rounded bg-orange-100 px-1.5 py-0.5 text-[10px] font-black text-[#d..."
+-                                       data-dom-id="tdyh-113"
+                                      >
++                                       VERY HOT
+                                    <p
+                                      className="mt-1 text-sm text-slate-500"
+-                                     data-dom-id="tdyh-114"
+                                    >
+                                      <span
+                                        className="font-medium text-slate-700"
+-                                       data-dom-id="tdyh-115"
+                                      >
++                                       5h ago
+                                    <div
+                                      className="mt-3 flex flex-wrap gap-1.5"
+-                                     data-dom-id="tdyh-116"
+                                    >
+                                      <span
+                                        className="rounded bg-slate-100 px-2 py-1 text-[11px] font-medium text-slate-600"
+-                                       data-dom-id="tdyh-117"
+                                      >
++                                       Java
+                                      <span
+                                        className="rounded bg-slate-100 px-2 py-1 text-[11px] font-medium text-slate-600"
+-                                       data-dom-id="tdyh-118"
+                                      >
++                                       Spring Boot
+                                      <span
+                                        className="rounded bg-slate-100 px-2 py-1 text-[11px] font-medium text-slate-600"
+-                                       data-dom-id="tdyh-119"
+                                      >
++                                       PostgreSQL
+                                  <div
+                                    className="text-sm"
+-                                   data-dom-id="tdyh-120"
+                                  >
+                                    <p
+                                      className="font-medium"
+-                                     data-dom-id="tdyh-121"
+                                    >
++                                     Milan, Italy
+                                    <p
+                                      className="mt-1 text-slate-500"
+-                                     data-dom-id="tdyh-122"
+                                    >
++                                     Fully remote
+                                  <div
+-                                   data-dom-id="tdyh-123"
+                                  >
+                                    <p
+                                      className="text-lg font-black text-[#d84320]"
+-                                     data-dom-id="tdyh-124"
+                                    >
++                                     8 applicants
+                                    <p
+                                      className="text-xs text-slate-400"
+-                                     data-dom-id="tdyh-125"
+                                    >
+                                  <div
+                                    className="flex items-center justify-between gap-3"
+-                                   data-dom-id="tdyh-126"
+                                  >
+                                    <button
+                                      onClick={function onClick}
+                                      className="grid size-12 shrink-0 place-items-center rounded-xl bg-slate-950 text..."
+                                      aria-label="Explain score 93"
+-                                     data-dom-id="tdyh-127"
+                                    >
++                                     93
+                                    <div
+                                      className="flex flex-wrap justify-end gap-1"
+-                                     data-dom-id="tdyh-128"
+                                    >
+                                      <LinkComponent href="/jobs/1" className="rounded bo...">
+                                        <a
+                                          className="rounded border border-slate-200 px-2 py-1 text-xs font-bold text-..."
+                                          ref={function}
+                                          onClick={function onClick}
+                                          onMouseEnter={function onMouseEnter}
+                                          onTouchStart={function onTouchStart}
+                                          href="/jobs/1"
+-                                         data-dom-id="tdyh-129"
+                                        >
++                                         Open
+                                      <button
+                                        onClick={function onClick}
+                                        className="rounded px-2 py-1 text-xs font-bold text-slate-500 hover:bg-slate-100"
+-                                       data-dom-id="tdyh-130"
+                                      >
++                                       Save
+                                      <button
+                                        onClick={function onClick}
+                                        className="rounded bg-slate-950 px-2 py-1 text-xs font-bold text-white"
+-                                       data-dom-id="tdyh-131"
+                                      >
++                                       Apply
+                                <article
+                                  className="grid gap-4 border-b border-slate-100 p-5 last:border-0 md:grid-cols-[1.8f..."
+-                                 data-dom-id="tdyh-132"
+                                >
+                                  <div
+-                                   data-dom-id="tdyh-133"
+                                  >
+                                    <div
+                                      className="flex flex-wrap items-center gap-2"
+-                                     data-dom-id="tdyh-134"
+                                    >
+                                      <LinkComponent href="/jobs/2" className="font-bold ...">
+                                        <a
+                                          className="font-bold hover:text-[#d84320]"
+                                          ref={function}
+                                          onClick={function onClick}
+                                          onMouseEnter={function onMouseEnter}
+                                          onTouchStart={function onTouchStart}
+                                          href="/jobs/2"
+-                                         data-dom-id="tdyh-135"
+                                        >
++                                         Backend Engineer — Java
+                                      <span
+                                        className="rounded bg-orange-100 px-1.5 py-0.5 text-[10px] font-black text-[#d..."
+-                                       data-dom-id="tdyh-136"
+                                      >
++                                       VERY HOT
+                                    <p
+                                      className="mt-1 text-sm text-slate-500"
+-                                     data-dom-id="tdyh-137"
+                                    >
+                                      <span
+                                        className="font-medium text-slate-700"
+-                                       data-dom-id="tdyh-138"
+                                      >
++                                       12h ago
+                                    <div
+                                      className="mt-3 flex flex-wrap gap-1.5"
+-                                     data-dom-id="tdyh-139"
+                                    >
+                                      <span
+                                        className="rounded bg-slate-100 px-2 py-1 text-[11px] font-medium text-slate-600"
+-                                       data-dom-id="tdyh-140"
+                                      >
++                                       Java
+                                      <span
+                                        className="rounded bg-slate-100 px-2 py-1 text-[11px] font-medium text-slate-600"
+-                                       data-dom-id="tdyh-141"
+                                      >
++                                       Spring
+                                      <span
+                                        className="rounded bg-slate-100 px-2 py-1 text-[11px] font-medium text-slate-600"
+-                                       data-dom-id="tdyh-142"
+                                      >
++                                       SQL
+                                  <div
+                                    className="text-sm"
+-                                   data-dom-id="tdyh-143"
+                                  >
+                                    <p
+                                      className="font-medium"
+-                                     data-dom-id="tdyh-144"
+                                    >
++                                     Barcelona, Spain
+                                    <p
+                                      className="mt-1 text-slate-500"
+-                                     data-dom-id="tdyh-145"
+                                    >
++                                     Remote · Europe
+                                  <div
+-                                   data-dom-id="tdyh-146"
+                                  >
+                                    <p
+                                      className="text-lg font-black text-[#d84320]"
+-                                     data-dom-id="tdyh-147"
+                                    >
++                                     18 applicants
+                                    <p
+                                      className="text-xs text-slate-400"
+-                                     data-dom-id="tdyh-148"
+                                    >
+                                  <div
+                                    className="flex items-center justify-between gap-3"
+-                                   data-dom-id="tdyh-149"
+                                  >
+                                    <button
+                                      onClick={function onClick}
+                                      className="grid size-12 shrink-0 place-items-center rounded-xl bg-slate-950 text..."
+                                      aria-label="Explain score 87"
+-                                     data-dom-id="tdyh-150"
+                                    >
++                                     87
+                                    <div
+                                      className="flex flex-wrap justify-end gap-1"
+-                                     data-dom-id="tdyh-151"
+                                    >
+                                      <LinkComponent href="/jobs/2" className="rounded bo...">
+                                        <a
+                                          className="rounded border border-slate-200 px-2 py-1 text-xs font-bold text-..."
+                                          ref={function}
+                                          onClick={function onClick}
+                                          onMouseEnter={function onMouseEnter}
+                                          onTouchStart={function onTouchStart}
+                                          href="/jobs/2"
+-                                         data-dom-id="tdyh-152"
+                                        >
++                                         Open
+                                      <button
+                                        onClick={function onClick}
+                                        className="rounded px-2 py-1 text-xs font-bold text-slate-500 hover:bg-slate-100"
+-                                       data-dom-id="tdyh-153"
+                                      >
++                                       Save
+                                      <button
+                                        onClick={function onClick}
+                                        className="rounded bg-slate-950 px-2 py-1 text-xs font-bold text-white"
+-                                       data-dom-id="tdyh-154"
+                                      >
++                                       Apply
+                                <article
+                                  className="grid gap-4 border-b border-slate-100 p-5 last:border-0 md:grid-cols-[1.8f..."
+-                                 data-dom-id="tdyh-155"
+                                >
+                                  <div
+-                                   data-dom-id="tdyh-156"
+                                  >
+                                    <div
+                                      className="flex flex-wrap items-center gap-2"
+-                                     data-dom-id="tdyh-157"
+                                    >
+                                      <LinkComponent href="/jobs/3" className="font-bold ...">
+                                        <a
+                                          className="font-bold hover:text-[#d84320]"
+                                          ref={function}
+                                          onClick={function onClick}
+                                          onMouseEnter={function onMouseEnter}
+                                          onTouchStart={function onTouchStart}
+                                          href="/jobs/3"
+-                                         data-dom-id="tdyh-158"
+                                        >
++                                         Graduate Software Developer
+                                    <p
+                                      className="mt-1 text-sm text-slate-500"
+-                                     data-dom-id="tdyh-159"
+                                    >
+                                      <span
+                                        className="font-medium text-slate-700"
+-                                       data-dom-id="tdyh-160"
+                                      >
++                                       20h ago
+                                    <div
+                                      className="mt-3 flex flex-wrap gap-1.5"
+-                                     data-dom-id="tdyh-161"
+                                    >
+                                      <span
+                                        className="rounded bg-slate-100 px-2 py-1 text-[11px] font-medium text-slate-600"
+-                                       data-dom-id="tdyh-162"
+                                      >
++                                       Java
+                                      <span
+                                        className="rounded bg-slate-100 px-2 py-1 text-[11px] font-medium text-slate-600"
+-                                       data-dom-id="tdyh-163"
+                                      >
++                                       TypeScript
+                                      <span
+                                        className="rounded bg-slate-100 px-2 py-1 text-[11px] font-medium text-slate-600"
+-                                       data-dom-id="tdyh-164"
+                                      >
++                                       REST
+                                  <div
+                                    className="text-sm"
+-                                   data-dom-id="tdyh-165"
+                                  >
+                                    <p
+                                      className="font-medium"
+-                                     data-dom-id="tdyh-166"
+                                    >
++                                     Amsterdam, Netherlands
+                                    <p
+                                      className="mt-1 text-slate-500"
+-                                     data-dom-id="tdyh-167"
+                                    >
++                                     Hybrid
+                                  <div
+-                                   data-dom-id="tdyh-168"
+                                  >
+                                    <p
+                                      className="text-lg font-black text-[#d84320]"
+-                                     data-dom-id="tdyh-169"
+                                    >
++                                     22 applicants
+                                    <p
+                                      className="text-xs text-slate-400"
+-                                     data-dom-id="tdyh-170"
+                                    >
+                                  <div
+                                    className="flex items-center justify-between gap-3"
+-                                   data-dom-id="tdyh-171"
+                                  >
+                                    <button
+                                      onClick={function onClick}
+                                      className="grid size-12 shrink-0 place-items-center rounded-xl bg-slate-950 text..."
+                                      aria-label="Explain score 82"
+-                                     data-dom-id="tdyh-172"
+                                    >
++                                     82
+                                    <div
+                                      className="flex flex-wrap justify-end gap-1"
+-                                     data-dom-id="tdyh-173"
+                                    >
+                                      <LinkComponent href="/jobs/3" className="rounded bo...">
+                                        <a
+                                          className="rounded border border-slate-200 px-2 py-1 text-xs font-bold text-..."
+                                          ref={function}
+                                          onClick={function onClick}
+                                          onMouseEnter={function onMouseEnter}
+                                          onTouchStart={function onTouchStart}
+                                          href="/jobs/3"
+-                                         data-dom-id="tdyh-174"
+                                        >
++                                         Open
+                                      <button
+                                        onClick={function onClick}
+                                        className="rounded px-2 py-1 text-xs font-bold text-slate-500 hover:bg-slate-100"
+-                                       data-dom-id="tdyh-175"
+                                      >
++                                       Saved
+                                      <button
+                                        onClick={function onClick}
+                                        className="rounded bg-slate-950 px-2 py-1 text-xs font-bold text-white"
+-                                       data-dom-id="tdyh-176"
+                                      >
++                                       Apply
+                                <article
+                                  className="grid gap-4 border-b border-slate-100 p-5 last:border-0 md:grid-cols-[1.8f..."
+-                                 data-dom-id="tdyh-177"
+                                >
+                                  <div
+-                                   data-dom-id="tdyh-178"
+                                  >
+                                    <div
+                                      className="flex flex-wrap items-center gap-2"
+-                                     data-dom-id="tdyh-179"
+                                    >
+                                      <LinkComponent href="/jobs/4" className="font-bold ...">
+                                        <a
+                                          className="font-bold hover:text-[#d84320]"
+                                          ref={function}
+                                          onClick={function onClick}
+                                          onMouseEnter={function onMouseEnter}
+                                          onTouchStart={function onTouchStart}
+                                          href="/jobs/4"
+-                                         data-dom-id="tdyh-180"
+                                        >
++                                         Software Engineer, Platform
+                                    <p
+                                      className="mt-1 text-sm text-slate-500"
+-                                     data-dom-id="tdyh-181"
+                                    >
+                                      <span
+                                        className="font-medium text-slate-700"
+-                                       data-dom-id="tdyh-182"
+                                      >
++                                       1d ago
+                                    <div
+                                      className="mt-3 flex flex-wrap gap-1.5"
+-                                     data-dom-id="tdyh-183"
+                                    >
+                                      <span
+                                        className="rounded bg-slate-100 px-2 py-1 text-[11px] font-medium text-slate-600"
+-                                       data-dom-id="tdyh-184"
+                                      >
++                                       Java
+                                      <span
+                                        className="rounded bg-slate-100 px-2 py-1 text-[11px] font-medium text-slate-600"
+-                                       data-dom-id="tdyh-185"
+                                      >
++                                       Spring Boot
+                                      <span
+                                        className="rounded bg-slate-100 px-2 py-1 text-[11px] font-medium text-slate-600"
+-                                       data-dom-id="tdyh-186"
+                                      >
++                                       AWS
+                                  <div
+                                    className="text-sm"
+-                                   data-dom-id="tdyh-187"
+                                  >
+                                    <p
+                                      className="font-medium"
+-                                     data-dom-id="tdyh-188"
+                                    >
++                                     Paris, France
+                                    <p
+                                      className="mt-1 text-slate-500"
+-                                     data-dom-id="tdyh-189"
+                                    >
++                                     Remote · Europe
+                                  <div
+-                                   data-dom-id="tdyh-190"
+                                  >
+                                    <p
+                                      className="text-lg font-black text-[#d84320]"
+-                                     data-dom-id="tdyh-191"
+                                    >
++                                     11 applicants
+                                    <p
+                                      className="text-xs text-slate-400"
+-                                     data-dom-id="tdyh-192"
+                                    >
+                                  <div
+                                    className="flex items-center justify-between gap-3"
+-                                   data-dom-id="tdyh-193"
+                                  >
+                                    <button
+                                      onClick={function onClick}
+                                      className="grid size-12 shrink-0 place-items-center rounded-xl bg-slate-950 text..."
+                                      aria-label="Explain score 79"
+-                                     data-dom-id="tdyh-194"
+                                    >
++                                     79
+                                    <div
+                                      className="flex flex-wrap justify-end gap-1"
+-                                     data-dom-id="tdyh-195"
+                                    >
+                                      <LinkComponent href="/jobs/4" className="rounded bo...">
+                                        <a
+                                          className="rounded border border-slate-200 px-2 py-1 text-xs font-bold text-..."
+                                          ref={function}
+                                          onClick={function onClick}
+                                          onMouseEnter={function onMouseEnter}
+                                          onTouchStart={function onTouchStart}
+                                          href="/jobs/4"
+-                                         data-dom-id="tdyh-196"
+                                        >
++                                         Open
+                                      <button
+                                        onClick={function onClick}
+                                        className="rounded px-2 py-1 text-xs font-bold text-slate-500 hover:bg-slate-100"
+-                                       data-dom-id="tdyh-197"
+                                      >
++                                       Save
+                                      <button
+                                        onClick={function onClick}
+                                        className="rounded bg-slate-950 px-2 py-1 text-xs font-bold text-white"
+-                                       data-dom-id="tdyh-198"
+                                      >
++                                       Apply
+                                <article
+                                  className="grid gap-4 border-b border-slate-100 p-5 last:border-0 md:grid-cols-[1.8f..."
+-                                 data-dom-id="tdyh-199"
+                                >
+                                  <div
+-                                   data-dom-id="tdyh-200"
+                                  >
+                                    <div
+                                      className="flex flex-wrap items-center gap-2"
+-                                     data-dom-id="tdyh-201"
+                                    >
+                                      <LinkComponent href="/jobs/5" className="font-bold ...">
+                                        <a
+                                          className="font-bold hover:text-[#d84320]"
+                                          ref={function}
+                                          onClick={function onClick}
+                                          onMouseEnter={function onMouseEnter}
+                                          onTouchStart={function onTouchStart}
+                                          href="/jobs/5"
+-                                         data-dom-id="tdyh-202"
+                                        >
++                                         Java Application Developer
+                                    <p
+                                      className="mt-1 text-sm text-slate-500"
+-                                     data-dom-id="tdyh-203"
+                                    >
+                                      <span
+                                        className="font-medium text-slate-700"
+-                                       data-dom-id="tdyh-204"
+                                      >
++                                       1d ago
+                                    <div
+                                      className="mt-3 flex flex-wrap gap-1.5"
+-                                     data-dom-id="tdyh-205"
+                                    >
+                                      <span
+                                        className="rounded bg-slate-100 px-2 py-1 text-[11px] font-medium text-slate-600"
+-                                       data-dom-id="tdyh-206"
+                                      >
++                                       Java
+                                      <span
+                                        className="rounded bg-slate-100 px-2 py-1 text-[11px] font-medium text-slate-600"
+-                                       data-dom-id="tdyh-207"
+                                      >
++                                       React
+                                      <span
+                                        className="rounded bg-slate-100 px-2 py-1 text-[11px] font-medium text-slate-600"
+-                                       data-dom-id="tdyh-208"
+                                      >
++                                       MySQL
+                                  <div
+                                    className="text-sm"
+-                                   data-dom-id="tdyh-209"
+                                  >
+                                    <p
+                                      className="font-medium"
+-                                     data-dom-id="tdyh-210"
+                                    >
++                                     Copenhagen, Denmark
+                                    <p
+                                      className="mt-1 text-slate-500"
+-                                     data-dom-id="tdyh-211"
+                                    >
++                                     Fully remote
+                                  <div
+-                                   data-dom-id="tdyh-212"
+                                  >
+                                    <p
+                                      className={"text-lg font-black "}
+-                                     data-dom-id="tdyh-213"
+                                    >
++                                     Unknown
+                                    <p
+                                      className="text-xs text-slate-400"
+-                                     data-dom-id="tdyh-214"
+                                    >
+                                  <div
+                                    className="flex items-center justify-between gap-3"
+-                                   data-dom-id="tdyh-215"
+                                  >
+                                    <button
+                                      onClick={function onClick}
+                                      className="grid size-12 shrink-0 place-items-center rounded-xl bg-slate-950 text..."
+                                      aria-label="Explain score 74"
+-                                     data-dom-id="tdyh-216"
+                                    >
++                                     74
+                                    <div
+                                      className="flex flex-wrap justify-end gap-1"
+-                                     data-dom-id="tdyh-217"
+                                    >
+                                      <LinkComponent href="/jobs/5" className="rounded bo...">
+                                        <a
+                                          className="rounded border border-slate-200 px-2 py-1 text-xs font-bold text-..."
+                                          ref={function}
+                                          onClick={function onClick}
+                                          onMouseEnter={function onMouseEnter}
+                                          onTouchStart={function onTouchStart}
+                                          href="/jobs/5"
+-                                         data-dom-id="tdyh-218"
+                                        >
++                                         Open
+                                      <button
+                                        onClick={function onClick}
+                                        className="rounded px-2 py-1 text-xs font-bold text-slate-500 hover:bg-slate-100"
+-                                       data-dom-id="tdyh-219"
+                                      >
++                                       Save
+                                      <button
+                                        onClick={function onClick}
+                                        className="rounded bg-slate-950 px-2 py-1 text-xs font-bold text-white"
+-                                       data-dom-id="tdyh-220"
+                                      >
++                                       Apply
+                  ...
+                ...
+    ...
+ 
+ GET /api/jobs 200 in 230ms (next.js: 157ms, proxy.ts: 23ms, application-code: 50ms)
+ GET /api/jobs 200 in 261ms (next.js: 148ms, proxy.ts: 51ms, application-code: 62ms)
+ GET / 200 in 884ms (next.js: 128ms, proxy.ts: 247ms, application-code: 509ms)
+ GET /api/jobs 200 in 430ms (next.js: 50ms, proxy.ts: 89ms, application-code: 291ms)
+ GET /api/jobs 200 in 743ms (next.js: 17ms, proxy.ts: 71ms, application-code: 655ms)
+ GET /apply-early 200 in 556ms (next.js: 231ms, proxy.ts: 191ms, application-code: 134ms)
+ GET / 200 in 465ms (next.js: 50ms, proxy.ts: 211ms, application-code: 203ms)
+ GET /api/jobs 200 in 595ms (next.js: 35ms, proxy.ts: 137ms, application-code: 422ms)
+ GET /api/jobs 200 in 421ms (next.js: 29ms, proxy.ts: 103ms, application-code: 289ms)
+✓ Finished filesystem cache database compaction in 21.5s
+✓ Compiled in 1961ms
+ GET / 200 in 5.0s (next.js: 3.7s, proxy.ts: 327ms, application-code: 1034ms)
+ GET / 200 in 1763ms (next.js: 717ms, proxy.ts: 863ms, application-code: 182ms)
+ GET / 200 in 339ms (next.js: 28ms, proxy.ts: 222ms, application-code: 90ms)
+ GET / 200 in 404ms (next.js: 35ms, proxy.ts: 180ms, application-code: 190ms)
+ GET / 200 in 242ms (next.js: 20ms, proxy.ts: 106ms, application-code: 116ms)
+ GET / 200 in 296ms (next.js: 22ms, proxy.ts: 76ms, application-code: 198ms)
+ GET / 200 in 395ms (next.js: 19ms, proxy.ts: 129ms, application-code: 248ms)
+ GET / 200 in 671ms (next.js: 170ms, proxy.ts: 136ms, application-code: 365ms)
+ GET / 200 in 1052ms (next.js: 287ms, proxy.ts: 161ms, application-code: 604ms)
+ GET / 200 in 884ms (next.js: 134ms, proxy.ts: 201ms, application-code: 548ms)
+ GET / 200 in 655ms (next.js: 273ms, proxy.ts: 170ms, application-code: 212ms)
+ GET / 200 in 963ms (next.js: 103ms, proxy.ts: 88ms, application-code: 772ms)
+ GET / 200 in 894ms (next.js: 282ms, proxy.ts: 192ms, application-code: 420ms)
+ GET / 200 in 192ms (next.js: 24ms, proxy.ts: 75ms, application-code: 93ms)
+ GET / 200 in 573ms (next.js: 55ms, proxy.ts: 278ms, application-code: 240ms)
+ GET / 200 in 339ms (next.js: 19ms, proxy.ts: 219ms, application-code: 102ms)
+ GET / 200 in 213ms (next.js: 23ms, proxy.ts: 87ms, application-code: 104ms)
+ GET / 200 in 510ms (next.js: 23ms, proxy.ts: 217ms, application-code: 269ms)
+ GET / 200 in 392ms (next.js: 105ms, proxy.ts: 127ms, application-code: 160ms)
+ GET / 200 in 286ms (next.js: 26ms, proxy.ts: 97ms, application-code: 164ms)
+ GET / 200 in 482ms (next.js: 112ms, proxy.ts: 121ms, application-code: 250ms)
+ GET / 200 in 328ms (next.js: 29ms, proxy.ts: 64ms, application-code: 235ms)
+ GET / 200 in 368ms (next.js: 84ms, proxy.ts: 119ms, application-code: 165ms)
+ GET / 200 in 585ms (next.js: 199ms, proxy.ts: 122ms, application-code: 265ms)
+ GET / 200 in 429ms (next.js: 18ms, proxy.ts: 97ms, application-code: 314ms)
+ GET / 200 in 528ms (next.js: 132ms, proxy.ts: 114ms, application-code: 281ms)
+ GET / 200 in 362ms (next.js: 34ms, proxy.ts: 134ms, application-code: 194ms)
+ GET / 200 in 181ms (next.js: 18ms, proxy.ts: 63ms, application-code: 100ms)
+ GET / 200 in 308ms (next.js: 20ms, proxy.ts: 91ms, application-code: 197ms)
+ GET / 200 in 269ms (next.js: 30ms, proxy.ts: 75ms, application-code: 164ms)
+ GET / 200 in 254ms (next.js: 15ms, proxy.ts: 60ms, application-code: 178ms)
+ GET / 200 in 453ms (next.js: 17ms, proxy.ts: 252ms, application-code: 184ms)
+ GET / 200 in 507ms (next.js: 45ms, proxy.ts: 131ms, application-code: 330ms)
+ GET / 200 in 566ms (next.js: 15ms, proxy.ts: 353ms, application-code: 199ms)
+ GET / 200 in 473ms (next.js: 6ms, proxy.ts: 122ms, application-code: 345ms)
+ GET / 200 in 776ms (next.js: 305ms, proxy.ts: 146ms, application-code: 325ms)
+ GET / 200 in 479ms (next.js: 84ms, proxy.ts: 151ms, application-code: 244ms)
+ GET / 200 in 238ms (next.js: 15ms, proxy.ts: 112ms, application-code: 111ms)
+ GET / 200 in 237ms (next.js: 22ms, proxy.ts: 73ms, application-code: 141ms)
+ GET / 200 in 294ms (next.js: 19ms, proxy.ts: 76ms, application-code: 199ms)
+ ELIFECYCLE  Command failed with exit code 1.
